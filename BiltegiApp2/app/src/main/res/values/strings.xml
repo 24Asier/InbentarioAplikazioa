@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">BiltegiApp</string>
+    <string name="titleUsers">Erabiltzaileak</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="txteditProduct">Produktua editatu</string>
+    <string name="txtProfile">Profilak</string>
+    <string name="txtAlbaran">Albaranak</string>
+    <string name="txtInventory">Inbentarioa</string>
+    <string name="txtnewProduct">Produktu berria</string>
+    <string name="txtName">Izena</string>
+    <string name="txtAmountQuan">Gutxieneko kantitatea</string>
+    <string name="txtAmount">Kantitatea</string>
+    <string name="txtbtnBack">Atzera</string>
+    <string name="txtbtnSave">Gorde</string>
+</resources>
