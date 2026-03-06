@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    //Datubase KSP dependentzia
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -48,4 +50,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    //ROOM
+    implementation(libs.androidx.room.runtime)
+    implementation("androidx.room:room-runtime:$2.8.4")
+    //Kotlin extenxioak
+    implementation(libs.androidx.room.ktx)
+    //KSP
+    ksp("androidx.room:room-compiler:2.8.4")
 }
