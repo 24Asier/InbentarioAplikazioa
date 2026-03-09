@@ -3,15 +3,12 @@ package com.example.biltegiapp2
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.media.Image
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.ZoomButtonsController
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -21,6 +18,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.biltegiapp2.databinding.ActivityMainBinding
+import com.example.biltegiapp2.databinding.DialogAdminBinding
 import com.example.biltegiapp2.databinding.DialogCreateProductBinding
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
     private lateinit var btnAdd: Button
     private lateinit var bindingAddProduct: DialogCreateProductBinding
+    private lateinit var bindingAdmin: DialogAdminBinding
     private lateinit var imgProduct: ImageView
     private lateinit var btneditProduct: Button
     private lateinit var btnProfile: Button
@@ -79,18 +78,19 @@ class MainActivity : AppCompatActivity() {
             btnInventory=binding.btnInventory
 
             btneditProduct.setOnClickListener {
-
+                val intent = Intent(this, EditProductActivity::class.java)
+                startActivity(intent)
             }
 
             btnProfile.setOnClickListener {
-
+                seeAdminVerification(btnProfile)
             }
 
             btnAlbaran.setOnClickListener {
-
+                seeAdminVerification(btnAlbaran)
             }
             btnInventory.setOnClickListener {
-
+                seeAdminVerification(btnInventory)
             }
         }
     }
@@ -113,7 +113,36 @@ class MainActivity : AppCompatActivity() {
             camera()
         }
     }
+
+    private fun seeAdminVerification(button:Button) {
+        bindingAdmin= DialogAdminBinding.inflate(layoutInflater)
+        val builder=androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setView(bindingAdmin.root)
+        val alertDialog = builder.create()
+        bindingAdmin.btnBack.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        bindingAdmin.btnCheck.setOnClickListener {
+            when(button.id){
+                R.id.btnProfile->{
+                    val intent= Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.btnAlbaran->{
+                    val intent= Intent(this, AlbaranActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.btnInventory->{
+                    val intent= Intent(this, InventoryActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+        alertDialog.show()
+    }
 }
+
+
 
 
 

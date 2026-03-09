@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">BiltegiApp</string>
+    <string name="aplikazioLogoa">Logotipo de la aplicación</string>
     <string name="titleUsers">Erabiltzaileak</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="back">⬅</string>
     <string name="txteditProduct">Produktua editatu</string>
     <string name="txtProfile">Profilak</string>
     <string name="txtAlbaran">Albaranak</string>
@@ -13,5 +15,17 @@
     <string name="txtAmount">Kantitatea</string>
     <string name="txtbtnBack">Atzera</string>
     <string name="txtbtnSave">Gorde</string>
-    <string name="aplikazioLogoa">Aplikazio Logoa</string>
+    <string name="txtEmail">Email</string>
+    <string name="txtPassword">Pasahitza</string>
+    <string name="txtbtnCheck">Egiaztatu</string>
+    <string name="txtnewProfile">Profil berria</string>
+    <string name="txtSurname">Abizenak</string>
+    <string name="txtAdmin">Administratzailea</string>
+    <string name="txtseeProfile">Ikusi profila</string>
+    <string name="txtEnable">Gaitu</string>
+    <string name="txtbtnDelete">Ezabatu</string>
+    <string name="txtseeAlbaran">Ikusi albaran</string>
+    <string name="txtnewAlbaran">Albaran berria</string>
+    <string name="txtDate">Data</string>
+    <string name="txtProduct"/>
 </resources>

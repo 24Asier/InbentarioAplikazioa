@@ -4,19 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat.enableEdgeToEdge
-import androidx.core.view.WindowInsetsCompat
-import com.example.biltegiapp2.databinding.ActivityEditProductBinding
 import androidx.appcompat.app.AppCompatActivity
-class EditProductActivity: InactivityPeriodActivity() {
-    private lateinit var binding: ActivityEditProductBinding
-    private lateinit var btnBackMain: Button
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.biltegiapp2.databinding.ActivityInventoryBinding
 
+class InventoryActivity: InactivityPeriodActivity() {
+
+    private lateinit var binding: ActivityInventoryBinding
+    private lateinit var btnBackMain: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityEditProductBinding.inflate(layoutInflater)
+        binding = ActivityInventoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
