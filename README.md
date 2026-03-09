@@ -18,22 +18,29 @@ graph TD
     C -- Ez --> B
 
     D --> E[Menu Desplegarria]
-
+    
     E --> F[Produktua Editatu]
     F --> F1[Produktuaren datuak aldatu / Gorde]
 
-    E --> G[Profilak]
+    E --> J[Admin Login Pantaila]
+    J --> K{Gmail eta Pasahitza OK?}
+    
+    K -- Ez --> L[Alert: Kredentzial Okerrak]
+    L --> J
+    
+    K -- Bai --> G[Profilak]
+    K -- Bai --> H[Albaranak]
+    K -- Bai --> I[Inbentarioa]
+
     G --> G1[Ikusi profil guztiak]
     G1 --> G2[Profila Editatu]
     G1 --> G3[Profil Berria Sortu]
 
-    E --> H[Albaranak]
     H --> H1[Zerrenda ikusi]
     H1 --> H2[Albaran berria igo]
     H2 --> H3[Argazkia atera / Kamera]
     H3 --> H4[Gorde eta Zerrendara itzuli]
 
-    E --> I[Inbentarioa]
     I --> I1[Produktu guztien ikuspegia]
 ```
 
