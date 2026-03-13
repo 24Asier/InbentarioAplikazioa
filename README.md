@@ -70,5 +70,36 @@ Profila hautatu ondoren, azken 10 interakzioak erakusten dituen panela agertuko 
 ---
 
 ## 🛠️ Administrazio Moduluak
+Menu zabalgarriaren bidez, hurrengo atal hauetara sar daiteke (rolaren arabera):
+### 1. Produktuen Kudeaketa 🍎
+* **Sorkuntza:** Argazkia (beharrezkoa), izena eta kantitatea sartu behar dira.
+* **Edizioa:** Produktuaren datuak aldatu, gaitasuna kudeatu (checkbox bidez) edo produktua ezabatu daiteke (baieztapen mezurekin).
+### 2. Profilen Administrazioa 👥
+Erabiltzaileak egoeraren arabera ordenatuta (Gaituta > Desgaituta).
+* **Datu berriak:** Izena, abizena, NANa, emaila, pasahitza eta "Admin" rola.
+* **Aldaketak:** Edozein profil editatu edo ezabatu daiteke modu seguruan.
+### 3. Albaranen Kontrola 📄
+Sarrera eta irteeren zerrenda osoa, hiru iragazki nagusirekin:
+* **Uneko hilabeteko albaranak**.
+* **Uneko astekoak**.
+* **Data tarte pertsonalizatua**.
+### 4. Inbentario Osoa (Excel Ikuspegia) 📊
+Produktu guztien zerrenda xehatua (desgaitutakoak barne):
+* **Datuak:** Izena, kantitatea eta gutxieneko kopurua.
+* **Iragazkiak:** Guztiak, desgaituak edo stock kritikoan daudenak.
+
+---
+
+## 📸 Multimedia Kudeaketa
+Aplikazioak gailuko kamera erabiltzen du argazkiak ateratzeko. Irudi hauek (produktuak, profilak, albaranak) aplikazioaren barnean gorde eta bistaratzen dira kudeaketa bisualagoa egiteko.
+
+---
+
+## 🛠️ Erabilitako Teknologiak
+* **Hizkuntza:** Kotlin.
+* **Iraunkortasuna:** (adibidez: SQLite/Room) datuak eta argazkiak gordetzeko.
+* **UI:** ConstraintLayout tabletetara egokitzeko diseinua.
+
+
 
 
