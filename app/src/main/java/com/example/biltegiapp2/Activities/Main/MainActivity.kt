@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Adapter
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.helper.widget.Carousel
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bindingAddProduct: DialogCreateProductBinding
     private lateinit var bindingAdmin: DialogAdminBinding
     private lateinit var bindingItemProduct: ItemProductBinding
+    private lateinit var productAdapter: ProductsAdapter
     private lateinit var btnMenu: ImageButton
     private lateinit var drawer: DrawerLayout
     private lateinit var btnAdd: Button
@@ -194,13 +197,16 @@ class MainActivity : AppCompatActivity() {
             val product = DAO.getProduktuaById(interaction.prodId)
             if(product != null) {
                 productList.add(product)
-
             }
         }
         if(productList.size>0) {
             rvProducts.visibility = View.VISIBLE
             rvProducts.layoutManager = LinearLayoutManager(this)
-            val adapter = ProductsAdapter(productList)
+            val adapter = ProductsAdapter(productList) { updateProduct->
+            Thread{
+                DAO.updateProduktua(updateProduct)
+            }.start()
+            }
             rvProducts.adapter = adapter
             Log.i("ROI", productList.size.toString())
             var txtCount= binding.txtCount
@@ -211,14 +217,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun ProductDetails(product: Produktua){
-        bindingItemProduct.txtProduct.setText(product.izena)
-        val context = binding.root.context
-        val imageId = context.resources.getIdentifier(product.img, "drawable", context.packageName)
-        if(imageId!=0) {
-            bindingItemProduct.imgAliment.setImageResource(imageId)
-        }else{
-            bindingItemProduct.imgAliment.setImageResource(R.drawable.aliment)
-        }
-    }
+
+
 }

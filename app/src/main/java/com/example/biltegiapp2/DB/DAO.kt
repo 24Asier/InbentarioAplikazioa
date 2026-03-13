@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.biltegiapp2.DB.Tablak.Albaran
 import com.example.biltegiapp2.DB.Tablak.Interakzioa
 import com.example.biltegiapp2.DB.Tablak.Produktua
@@ -39,4 +40,11 @@ interface DAO {
 
     @Query("SELECT * FROM Albaran WHERE profilId = :profilId")
     fun getAlbaranakByProfilId(profilId: Int): List<Albaran>
+
+    @Update
+    fun updateProfila(profila:Profila)
+    @Update
+    fun updateProduktua(product: Produktua)
+    @Update
+    fun updateAlbaran(albaran: Albaran)
 }
