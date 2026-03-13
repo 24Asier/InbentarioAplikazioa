@@ -37,28 +37,28 @@ abstract class Datubasea : RoomDatabase(){
         override fun onCreate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
             super.onCreate(db)
             db.execSQL("""
-                    INSERT INTO Profila (profilID, izena, admin, img, email, pasahitza, gaituta) 
-                    VALUES (1, 'John Doe', 0, 'imagen.jpg', 'john@gmail.com', 'usuario1', 1)
+                    INSERT INTO Profila (profilID, izena, abizena, admin, img, email, pasahitza, gaituta) 
+                    VALUES (1, 'John', 'Doe', 0, 'imagen.jpg', 'john@gmail.com', 'usuario1', 1)
                 """)
             db.execSQL("""
-                    INSERT INTO Profila (profilID, izena, admin, img, email, pasahitza, gaituta) 
-                    VALUES (2, 'Jane Doe', 1, 'imagen.jpg', 'jane@gmail.com', 'admin1', 1)
+                    INSERT INTO Profila (profilID, izena, abizena, admin, img, email, pasahitza, gaituta) 
+                    VALUES (2, 'Jane', 'Doe', 1, 'imagen.jpg', 'jane@gmail.com', 'admin1', 1)
                 """)
             db.execSQL("""
-                    INSERT INTO Albaran (albaranId, profilID, izena, cif, kantitatea, data, ordainduta) 
-                    VALUES (1, 0, 'albaran1', 'B12345678', 100, '01-01-2026', 0)
+                    INSERT INTO Albaran (albaranId, profilID, izena, cif, img, kantitatea, data, ordainduta) 
+                    VALUES (1, 0, 'albaran1', 'B12345678', 'albaran1.jpg', 100, '01-01-2026', 0)
                 """)
             db.execSQL("""
-                    INSERT INTO Albaran (albaranId, profilID, izena, cif, kantitatea, data, ordainduta) 
-                    VALUES (2, 1, 'albaran2', 'A12345678', 190, '03-01-2026', 1)
+                    INSERT INTO Albaran (albaranId, profilID, izena, cif, img, kantitatea, data, ordainduta) 
+                    VALUES (2, 1, 'albaran2', 'A12345678', 'albaran2.jpg', 190, '03-01-2026', 1)
                 """)
             db.execSQL("""
-                    INSERT INTO Produktua (prodId, izena, img, mota, gaituta) 
-                    VALUES (1, 'Produktua1', 'prod1.jpg', 'edaria', 1)
+                    INSERT INTO Produktua (prodId, izena, img, mota, gaituta, kantitatea, gutxienekoKantitatea) 
+                    VALUES (1, 'Produktua1', 'prod1.jpg', 'edaria', 1,  30, 5)
                 """)
             db.execSQL("""
-                    INSERT INTO Produktua (prodId, izena, img, mota, gaituta) 
-                    VALUES (2, 'Produktua2', 'prod2.jpg', 'janaria', 0)
+                    INSERT INTO Produktua (prodId, izena, img, mota, gaituta, kantitatea, gutxienekoKantitatea) 
+                    VALUES (2, 'Produktua2', 'prod2.jpg', 'janaria', 0, 50, 10)
                 """)
             db.execSQL("""
                     INSERT INTO Interakzioa (interId, profilId, prodId, dataInter) 

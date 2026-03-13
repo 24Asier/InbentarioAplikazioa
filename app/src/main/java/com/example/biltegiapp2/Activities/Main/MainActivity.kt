@@ -34,14 +34,16 @@ import com.example.biltegiapp2.R
 import com.example.biltegiapp2.databinding.ActivityMainBinding
 import com.example.biltegiapp2.databinding.DialogAdminBinding
 import com.example.biltegiapp2.databinding.DialogCreateProductBinding
+import com.example.biltegiapp2.databinding.ItemProductBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var bindingAddProduct: DialogCreateProductBinding
+    private lateinit var bindingAdmin: DialogAdminBinding
+    private lateinit var bindingItemProduct: ItemProductBinding
     private lateinit var btnMenu: ImageButton
     private lateinit var drawer: DrawerLayout
     private lateinit var btnAdd: Button
-    private lateinit var bindingAddProduct: DialogCreateProductBinding
-    private lateinit var bindingAdmin: DialogAdminBinding
     private lateinit var imgProduct: ImageView
     private lateinit var rvUsers: RecyclerView
     private lateinit var rvProducts: RecyclerView
@@ -192,6 +194,7 @@ class MainActivity : AppCompatActivity() {
             val product = DAO.getProduktuaById(interaction.prodId)
             if(product != null) {
                 productList.add(product)
+
             }
         }
         if(productList.size>0) {
@@ -202,7 +205,20 @@ class MainActivity : AppCompatActivity() {
             Log.i("ROI", productList.size.toString())
             var txtCount= binding.txtCount
             txtCount.setText(productList.size.toString())
+        }else{
+            rvProducts.visibility= View.INVISIBLE
+            binding.txtCount.setText("0")
         }
 
+    }
+    private fun ProductDetails(product: Produktua){
+        bindingItemProduct.txtProduct.setText(product.izena)
+        val context = binding.root.context
+        val imageId = context.resources.getIdentifier(product.img, "drawable", context.packageName)
+        if(imageId!=0) {
+            bindingItemProduct.imgAliment.setImageResource(imageId)
+        }else{
+            bindingItemProduct.imgAliment.setImageResource(R.drawable.aliment)
+        }
     }
 }

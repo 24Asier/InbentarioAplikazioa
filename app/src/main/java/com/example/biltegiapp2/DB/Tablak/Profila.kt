@@ -8,6 +8,7 @@ data class Profila (
     @PrimaryKey(autoGenerate = true)
     var profilID: Int,
     var izena: String,
+    var abizena:String,
     var admin: Boolean,
     var img: String,
     var email: String,

@@ -1,5 +1,6 @@
 package com.example.biltegiapp2.Activities.RVs.rvProducts
 
+import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,23 +8,36 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.biltegiapp2.DB.Tablak.Produktua
 import com.example.biltegiapp2.R
-class ProductsAdapter (private val products: List<Produktua>): RecyclerView.Adapter<ProductsViewHolder>() {
+import com.example.biltegiapp2.databinding.ItemProductBinding
+
+class ProductsAdapter (private val products: List<Produktua>): RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
+
+    inner class ProductViewHolder(val bindingItem: ItemProductBinding): RecyclerView.ViewHolder(bindingItem.root)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProductsViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.item_product, parent, false)
-        return ProductsViewHolder(view)
+    ): ProductViewHolder {
+        val view = ItemProductBinding.inflate(
+            LayoutInflater.from(parent.context),parent
+            , false)
+        return ProductViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: ProductsViewHolder,
+        holder: ProductViewHolder,
         position: Int
     ) {
+        val item= products[position]
+        holder.bindingItem.txtProduct.setText(item.izena)
+        val context =holder.itemView.context
+        val imageId=context.resources.getIdentifier(item.img, "drawable", context.packageName)
+        if(imageId!=0){
+            holder.bindingItem.imgAliment.setImageResource(imageId)
+        }else{
+            holder.bindingItem.imgAliment.setImageResource(R.drawable.aliment)
 
-        holder.render(products[position])
+        }
+        holder.bindingItem.txtQuatity.setText(item.kantitatea.toString())
     }
 
     override fun getItemCount(): Int {

@@ -12,6 +12,7 @@ data class Albaran (
     var profilId: Int,
     var izena: String,
     var cif: String,
+    var img:String,
     var kantitatea: Int,
     var data: String,
     var ordainduta: Boolean

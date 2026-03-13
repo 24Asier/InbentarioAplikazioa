@@ -139,6 +139,7 @@ class ProfileActivity: InactivityPeriodActivity() {
         }
 
         bindingDialogSeeProfile.etName.setText(user.izena.toString())
+        bindingDialogSeeProfile.etSurname.setText(user.abizena.toString())
         val context = binding.root.context
         val imageId = context.resources.getIdentifier(user.img, "drawable", context.packageName)
         if(imageId!=0) {

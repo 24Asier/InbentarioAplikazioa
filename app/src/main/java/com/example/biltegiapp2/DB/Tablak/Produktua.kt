@@ -10,5 +10,7 @@ data class Produktua (
     var izena: String,
     var img: String,
     var mota: String,
-    var gaituta: Boolean
+    var gaituta: Boolean,
+    var kantitatea:Int,
+    var gutxienekoKantitatea:Int
 )
