@@ -9,5 +9,6 @@ data class Produktua (
     var prodId: Int,
     var izena: String,
     var img: String,
-    var mota: String
+    var mota: String,
+    var gaituta: Boolean
 )

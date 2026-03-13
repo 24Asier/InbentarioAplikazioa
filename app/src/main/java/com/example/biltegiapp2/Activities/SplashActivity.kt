@@ -1,9 +1,13 @@
-package com.example.biltegiapp2
+package com.example.biltegiapp2.Activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import com.example.biltegiapp2.Activities.Main.MainActivity
+import com.example.biltegiapp2.R
 import com.example.biltegiapp2.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -22,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
             val animazioa = AnimationUtils.loadAnimation(this, R.anim.bistaratu_logoa)
             binding.imgLogo.startAnimation(animazioa)
 
-            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()

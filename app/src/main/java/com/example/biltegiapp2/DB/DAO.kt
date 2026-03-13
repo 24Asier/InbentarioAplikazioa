@@ -11,6 +11,11 @@ import com.example.biltegiapp2.DB.Tablak.Profila
 
 @Dao
 interface DAO {
+    @Query("SELECT * FROM Profila")
+    fun getAllProfila(): List<Profila>
+
+    @Query("SELECT * FROM Produktua")
+    fun getAllProducts(): List<Produktua>
     @Insert
     fun insertProfila(profila: Profila)
 

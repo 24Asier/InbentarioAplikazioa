@@ -1,20 +1,17 @@
-package com.example.biltegiapp2
+package com.example.biltegiapp2.Activities.Albaran
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-
 import android.widget.Button
-import android.widget.ImageView
-import androidx.appcompat.app.AlertDialog
-
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.biltegiapp2.Activities.InactivityPeriodActivity
+import com.example.biltegiapp2.Activities.Main.MainActivity
+import com.example.biltegiapp2.R
 import com.example.biltegiapp2.databinding.ActivityAlbaranBinding
 import com.example.biltegiapp2.databinding.DialogSeeEditNewAlbaranBinding
-
 
 class AlbaranActivity: InactivityPeriodActivity() {
 

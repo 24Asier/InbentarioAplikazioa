@@ -28,4 +28,14 @@
     <string name="txtnewAlbaran">Albaran berria</string>
     <string name="txtDate">Data</string>
     <string name="txtProduct"/>
+    <string-array name="enable_options">
+        <item>Aukeratu</item>
+        <item>Gaituta</item>
+        <item>Ez gaituta</item>
+    </string-array>
+    <string-array name="type_options">
+        <item>Aukeratu</item>
+        <item>Administratzailea</item>
+        <item>Langilea</item>
+    </string-array>
 </resources>

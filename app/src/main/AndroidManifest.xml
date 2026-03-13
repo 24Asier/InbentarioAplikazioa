@@ -14,18 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BiltegiApp2">
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity android:name=".Activities.Main.MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    <activity android:name=".SplashActivity" android:exported="true"/>
-    <activity android:name=".EditProductActivity" android:exported="false"/>
-    <activity android:name=".ProfileActivity" android:exported="false"/>
-    <activity android:name=".AlbaranActivity" android:exported="false"/>
-    <activity android:name=".InventoryActivity" android:exported="false"/>
-    <receiver android:name=".BootReceiver" android:exported="true">
+    <activity android:name=".Activities.SplashActivity" android:exported="true"/>
+    <activity android:name=".Activities.Edit.EditProductActivity" android:exported="false"/>
+    <activity android:name=".Activities.Profile.ProfileActivity" android:exported="false"/>
+    <activity android:name=".Activities.Albaran.AlbaranActivity" android:exported="false"/>
+    <activity android:name=".Activities.Inventory.InventoryActivity" android:exported="false"/>
+    <receiver android:name=".Activities.BootReceiver" android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED"/>
         </intent-filter>

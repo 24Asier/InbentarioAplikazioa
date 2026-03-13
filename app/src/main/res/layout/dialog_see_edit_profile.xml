@@ -27,12 +27,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:hint="txtName"/>
-            <EditText
-                android:id="@+id/etSurname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:hint="@string/txtSurname"/>
             <LinearLayout
                 android:id="@+id/adminOptions"
                 android:layout_width="match_parent"
