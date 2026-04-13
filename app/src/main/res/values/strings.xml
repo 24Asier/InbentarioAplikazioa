@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">BiltegiApp</string>
+    <string name="aplikazioLogoa">Logotipo de la aplicación</string>
+    <string name="titleUsers">Erabiltzaileak</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="back">⬅</string>
+    <string name="txteditProduct">Produktua editatu</string>
+    <string name="txtProfile">Profilak</string>
+    <string name="txtAlbaran">Albaranak</string>
+    <string name="txtInventory">Inbentarioa</string>
+    <string name="txtnewProduct">Produktu berria</string>
+    <string name="txtName">Izena</string>
+    <string name="txtAmountQuan">Gutxieneko kantitatea</string>
+    <string name="txtAmount">Kantitatea</string>
+    <string name="txtType">Mota</string>
+    <string name="txtbtnBack">Atzera</string>
+    <string name="txtbtnSave">Gorde</string>
+    <string name="txtEmail">Email</string>
+    <string name="txtPassword">Pasahitza</string>
+    <string name="txtbtnCheck">Egiaztatu</string>
+    <string name="txtPaid">Ordainduta</string>
+    <string name="txtCif">CIF</string>
+    <string name="txtnewProfile">Profil berria</string>
+    <string name="txtSurname">Abizenak</string>
+    <string name="txtAdmin">Administratzailea</string>
+    <string name="txtseeProfile">Ikusi profila</string>
+    <string name="txtEnable">Gaitu</string>
+    <string name="txtbtnDelete">Ezabatu</string>
+    <string name="txtseeAlbaran">Ikusi albaran</string>
+    <string name="txtnewAlbaran">Albaran berria</string>
+    <string name="txtDate">Data</string>
+    <string name="txtMessageDelete">Ziur zaude?</string>
+    <string name="txtYes">Bai</string>
+    <string name="txtNo">Ez</string>
+    <string name="txtMessageAlert">Aukeratu zure erabiltzailea</string>
+    <string name="txtProduct"/>
+    <string-array name="products_quantity_options">
+        <item>Guztiak</item>
+        <item>Gutxieneko kantitatea baino gehiago</item>
+        <item>Gutxieneko kantitatea baino gutxiago</item>
+    </string-array>
+    <string-array name="enable_options">
+        <item>Guztiak</item>
+        <item>Gaituta</item>
+        <item>Ez gaituta</item>
+    </string-array>
+    <string-array name="type_options">
+        <item>Guztiak</item>
+        <item>Administratzailea</item>
+        <item>Langilea</item>
+    </string-array>
+
+    <string-array name="product_type_options">
+        <item>Guztiak</item>
+        <item>Edaria</item>
+        <item>Janaria</item>
+    </string-array>
+    <string-array name="albaran_paid_options">
+        <item>Guztiak</item>
+        <item>Ordainduta</item>
+        <item>Ordaindu gabe</item>
+    </string-array>
+
+    <string-array name="inventory_sort_options">
+        <item>Guztiak</item>
+        <item>A-Z</item>
+        <item>Z-A</item>
+        <item>Kantitate gehienez gutxienez</item>
+        <item>Kantitate gutxienez gehienez</item>
+    </string-array>
+
+    <string-array name="date_filter_options">
+        <item>Guztiak</item>
+        <item>Egun 1</item>
+        <item>Aste 1</item>
+        <item>Hilabete 1</item>
+    </string-array>
+
+</resources>
