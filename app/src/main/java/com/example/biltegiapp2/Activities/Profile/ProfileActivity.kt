@@ -203,7 +203,7 @@ class ProfileActivity: InactivityPeriodActivity() {
         bindingDialogSeeProfile.etName.setText(user.izena)
         bindingDialogSeeProfile.etSurname.setText(user.abizena)
 
-        AppUtils.uploadImg( bindingDialogSeeProfile.imgProfile, user.img)
+        AppUtils.uploadImg( bindingDialogSeeProfile.imgProfile, user.img, "outline_account_circle_24")
 
         if(user.gaituta) {
             bindingDialogSeeProfile.checkEnable.isChecked=true

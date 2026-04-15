@@ -14,7 +14,7 @@ class AlbaranViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val txtAlbaran : TextView= view.findViewById(R.id.txtAlbaran)
 
     fun render(albaran: Albaran){
-        AppUtils.uploadImg(photoAlbaran, albaran.img)
+        AppUtils.uploadImg(photoAlbaran, albaran.img, "albaran")
         txtAlbaran.setText(albaran.izena)
     }
 

@@ -14,7 +14,7 @@ import java.util.Locale
 object AppUtils {
 
 
-    fun uploadImg(imageView: ImageView, imagePathOrName: String) {
+    fun uploadImg(imageView: ImageView, imagePathOrName: String, elseImg: String) {
         val file = java.io.File(imagePathOrName)
         if (file.exists()) {
             imageView.setImageURI(android.net.Uri.fromFile(file))
@@ -26,15 +26,19 @@ object AppUtils {
             if (imageId != 0) {
                 imageView.setImageResource(imageId)
             } else {
-                imageView.setImageResource(R.drawable.albaran)
-            }
+                imageView.setImageResource(
+                    context.resources.getIdentifier(elseImg, "drawable", context.packageName)
+                )            }
         }
     }
 
      fun savePhoto(context: Context, bitmap: Bitmap, name:String, type: String):String{
-        val dir = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "BiltegiApp")
-        val archiveName ="img_${name.replace(" ", "_")}:${System.currentTimeMillis()}.jpg"
-        val archive= File(dir, archiveName)
+        val dir = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "BiltegiApp2")
+         if (!dir.exists()) {
+             dir.mkdirs()
+         }
+         val archiveName ="img_${name.replace(" ", "_")}_${System.currentTimeMillis()}.jpg"
+         val archive= File(dir, archiveName)
 
         try{
             val stream =  java.io.FileOutputStream(archive)

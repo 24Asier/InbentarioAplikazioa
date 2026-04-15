@@ -178,7 +178,7 @@ class AlbaranActivity: InactivityPeriodActivity() {
         bindingDialogAlbaran.etDate.setText(albaran.data)
         bindingDialogAlbaran.etDate.visibility= View.VISIBLE
         bindingDialogAlbaran.etDate.isEnabled=false
-        AppUtils.uploadImg(bindingDialogAlbaran.imgAlbaran, albaran.img)
+        AppUtils.uploadImg(bindingDialogAlbaran.imgAlbaran, albaran.img, "albaran")
         if(albaran.ordainduta) {
             bindingDialogAlbaran.cbPaid.isChecked=true
         }

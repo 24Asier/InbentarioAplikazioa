@@ -15,7 +15,7 @@ class EditProductViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     fun render(products: Produktua){
         val context= itemView.context
-        AppUtils.uploadImg(photoUser, products.img)
+        AppUtils.uploadImg(photoUser, products.img, "aliment")
         txtUser.text= products.izena
     }
 }

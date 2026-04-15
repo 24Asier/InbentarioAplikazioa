@@ -14,7 +14,7 @@ class UsersViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val txtUser: TextView = view.findViewById(R.id.txtUser)
 
     fun render(users: Profila){
-        AppUtils.uploadImg(photoUser, users.img)
+        AppUtils.uploadImg(photoUser, users.img, "outline_account_circle_24")
         txtUser.text = users.izena
     }
 }

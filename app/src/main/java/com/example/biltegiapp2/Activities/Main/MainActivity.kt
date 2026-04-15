@@ -206,6 +206,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 dao.insertInterakzioa(interaction)
                 runOnUiThread {
+                    tempBitmap = null
                     alertDialog.dismiss()
                     onItemSelected(user)
                 }

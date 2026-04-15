@@ -20,7 +20,14 @@ class ProductsViewHolder(private val binding: ItemProductBinding): RecyclerView.
             binding.imgAliment.strokeWidth = 0f
         }
 
-        AppUtils.uploadImg(binding.imgAliment, products.img)
+        if(products.kantitatea == 0){
+            val redColor=Color.argb(68, 255, 0, 0)
+            binding.imgAliment.setColorFilter(redColor, android.graphics.PorterDuff.Mode.SRC_OVER)
+        }else{
+            binding.imgAliment.clearColorFilter()
+        }
+
+        AppUtils.uploadImg(binding.imgAliment, products.img, "aliment")
         binding.txtProduct.setText(products.izena)
 
         binding.txtQuatity.setText(products.kantitatea.toString())
@@ -30,9 +37,13 @@ class ProductsViewHolder(private val binding: ItemProductBinding): RecyclerView.
             updateProduktua(products)
         }
         binding.btnMinus.setOnClickListener {
-            products.kantitatea--
-            binding.txtQuatity.setText(products.kantitatea.toString())
-            updateProduktua(products)
+            if(products.kantitatea == 0){
+                binding.btnMinus.isEnabled=false
+            }else {
+                products.kantitatea--
+                binding.txtQuatity.setText(products.kantitatea.toString())
+                updateProduktua(products)
+            }
         }
     }
 }
