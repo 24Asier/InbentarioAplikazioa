@@ -4,12 +4,16 @@
     android:layout_width="400dp"
     android:layout_height="400dp"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@drawable/style">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtnewProfile"
         android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="@color/blue_primary"
+        android:textStyle="bold"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,13 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:hint="txtName"/>
+                android:hint="@string/txtName"
+                android:background="@drawable/edit_text_style"/>
             <EditText
                 android:id="@+id/etSurname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:hint="@string/txtSurname"/>
+                android:hint="@string/txtSurname"
+                android:background="@drawable/edit_text_style"/>
             <LinearLayout
                 android:id="@+id/adminOptions"
                 android:layout_width="match_parent"
@@ -44,13 +50,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:hint="@string/txtEmail"/>
+                        android:hint="@string/txtEmail"
+                        android:background="@drawable/edit_text_style"/>
                     <EditText
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:hint="@string/txtPassword"/>
+                        android:hint="@string/txtPassword"
+                        android:background="@drawable/edit_text_style"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -60,13 +68,15 @@
                     android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtbtnSave"/>
+                    android:text="@string/txtbtnSave"
+                    android:backgroundTint="@color/blue_dark"/>
                 <Button
                     android:id="@+id/btnBackProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="@string/txtbtnBack" />
+                    android:text="@string/txtbtnBack"
+                    android:backgroundTint="@color/blue_dark"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -79,7 +89,11 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txtAdmin"/>
+                android:text="@string/txtAdmin"
+                android:textColor="@color/blue_primary"
+                android:textSize="15sp"
+                android:buttonTint="@color/blue_dark"
+                />
             <ImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="200dp"

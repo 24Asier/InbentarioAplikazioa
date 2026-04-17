@@ -3,14 +3,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="400dp"
     android:layout_height="400dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:radius="25dp"
+    android:width="1dp"
+    android:background="@drawable/style"
+
+    >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtnewProduct"
         android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="@color/blue_primary"
+        android:textStyle="bold"
         />
    <LinearLayout
        android:layout_width="match_parent"
@@ -27,30 +34,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/txtName"/>
+            android:hint="@string/txtName"
+            android:background="@drawable/edit_text_style"/>
         <EditText
             android:id="@+id/etQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/txtAmount"/>
+            android:hint="@string/txtAmount"
+            android:background="@drawable/edit_text_style"/>
         <EditText
             android:id="@+id/etLessQuatity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/txtAmountQuan"/>
+            android:hint="@string/txtAmountQuan"
+            android:background="@drawable/edit_text_style"/>
         <Spinner
             android:id="@+id/spinnerType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:background="@drawable/style"
             />
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txtbtnSave"/>
+            android:text="@string/txtbtnSave"
+            android:backgroundTint="@color/blue_dark"/>
 
     </LinearLayout>
        <LinearLayout
@@ -64,6 +76,7 @@
                android:layout_gravity="center"
                android:layout_margin="20dp"
                android:text="@string/txtbtnBack"
+               android:backgroundTint="@color/blue_dark"
                />
             <ImageView
                 android:id="@+id/imgProduct"
@@ -73,6 +86,7 @@
                 android:layout_gravity="center"
                 android:clickable="true"
                 android:background="@color/grey"
+
             />
        </LinearLayout>
    </LinearLayout>

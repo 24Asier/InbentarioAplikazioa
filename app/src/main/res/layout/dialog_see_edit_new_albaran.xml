@@ -5,13 +5,17 @@
     android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@drawable/style">
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="bgfvcd"
         android:textAlignment="center"
+        android:textColor="@color/blue_primary"
+        android:textSize="25sp"
+        android:textStyle="bold"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,26 +32,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:hint="@string/txtName"/>
+                android:hint="@string/txtName"
+                android:background="@drawable/edit_text_style"/>
             <EditText
                 android:id="@+id/etCif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:hint="@string/txtCif"/>
+                android:hint="@string/txtCif"
+                android:background="@drawable/edit_text_style"/>
             <EditText
                 android:id="@+id/etQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:hint="@string/txtAmount"/>
+                android:hint="@string/txtAmount"
+                android:background="@drawable/edit_text_style"/>
             <EditText
                 android:id="@+id/etDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:hint="@string/txtDate"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:background="@drawable/edit_text_style"
+                />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,13 +66,15 @@
                     android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtbtnSave"/>
+                    android:text="@string/txtbtnSave"
+                    android:backgroundTint="@color/blue_dark"/>
                 <Button
                     android:layout_marginStart="20dp"
                     android:id="@+id/btnBackAlbaran"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtbtnBack"/>
+                    android:text="@string/txtbtnBack"
+                    android:backgroundTint="@color/blue_dark"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -77,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txtbtnDelete"
-                android:textColor="@color/red"/>
+                android:backgroundTint="@color/red"/>
             <ImageView
                 android:id="@+id/imgAlbaran"
                 android:layout_width="200dp"
@@ -94,6 +105,9 @@
                 android:text="@string/txtPaid"
                 android:gravity="center"
                 android:layout_gravity="center"
+                android:textColor="@color/blue_primary"
+                android:textSize="15sp"
+                android:buttonTint="@color/blue_dark"
                 />
         </LinearLayout>
     </LinearLayout>

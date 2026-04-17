@@ -22,13 +22,18 @@
             android:text="@string/titleUsers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/blue_primary"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/titleMain"/>
+            app:layout_constraintTop_toBottomOf="@id/titleMain"
+
+            />
 
         <!--android:visibility="invisible"-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,13 +53,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="8dp"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
                 <Spinner
                     android:id="@+id/filterQuantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
+                    android:background="@drawable/style"
                     />
                 <Spinner
                     android:id="@+id/filterDate"
@@ -62,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:visibility="invisible"
+                    android:background="@drawable/style"
                     />
                 <View
                     android:layout_width="0dp"
@@ -70,8 +78,13 @@
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchProduct"
+                    android:visibility="invisible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="Bilatu produktua..."
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/style"
                     />
                 <ImageButton
                     android:id="@+id/btnMenu"
@@ -101,7 +114,9 @@
                             android:id="@+id/txtCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
+                            android:layout_gravity="center"
+                            android:textSize="30dp"
+                            android:textColor="@color/blue_primary"
                         />
                         <Button
                             android:id="@+id/btnAdd"
@@ -115,13 +130,15 @@
                             android:padding="0dp"
                             app:cornerRadius="40dp"
                             android:visibility="invisible"
+                            android:backgroundTint="@color/blue_dark"
                              />
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvProducts"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="20dp"
+                        />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -140,29 +157,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txteditProduct"
+            android:backgroundTint="@color/blue_dark"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"/>
         <Button
             android:id="@+id/btnProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtProfile"
+            android:backgroundTint="@color/blue_dark"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             />
         <Button
             android:id="@+id/btnAlbaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtAlbaran"
+            android:backgroundTint="@color/blue_dark"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             />
         <Button
             android:id="@+id/btnInventory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtInventory"
+            android:backgroundTint="@color/blue_dark"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             />
     </LinearLayout>
 

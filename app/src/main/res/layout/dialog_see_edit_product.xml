@@ -5,13 +5,16 @@
     android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@drawable/style">
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txtProduct"
+        android:text="@string/txteditProduct"
         android:textAlignment="center"
+        android:textColor="@color/blue_primary"
+        android:textSize="25sp"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,24 +31,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="txtName"/>
+                android:hint="@string/txtName"
+                android:background="@drawable/edit_text_style"/>
             <EditText
                 android:id="@+id/etQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="@string/txtAmount"/>
+                android:hint="@string/txtAmount"
+                android:background="@drawable/edit_text_style"/>
             <EditText
                 android:id="@+id/etLessQuatity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="@string/txtAmountQuan"/>
+                android:hint="@string/txtAmountQuan"
+                android:background="@drawable/edit_text_style"/>
             <Spinner
                 android:id="@+id/spinnerTypeDialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@drawable/style"
                 />
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -57,13 +64,15 @@
                     android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtbtnSave"/>
+                    android:text="@string/txtbtnSave"
+                    android:backgroundTint="@color/blue_dark"/>
                 <Button
                     android:layout_marginStart="20dp"
                     android:id="@+id/btnBackAlbaran"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtbtnBack"/>
+                    android:text="@string/txtbtnBack"
+                    android:backgroundTint="@color/blue_dark"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -77,7 +86,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txtbtnDelete"
-                android:textColor="@color/red"/>
+                android:backgroundTint="@color/red"
+                />
             <ImageView
                 android:id="@+id/imgProduct"
                 android:layout_width="200dp"
@@ -94,7 +104,9 @@
                 android:text="@string/txtbtnCheck"
                 android:gravity="center"
                 android:layout_gravity="center"
-                />
+                android:textColor="@color/blue_primary"
+                android:textSize="15sp"
+                android:buttonTint="@color/blue_dark"/>
         </LinearLayout>
     </LinearLayout>
 

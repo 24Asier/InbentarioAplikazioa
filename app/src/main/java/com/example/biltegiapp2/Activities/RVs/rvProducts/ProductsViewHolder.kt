@@ -37,7 +37,7 @@ class ProductsViewHolder(private val binding: ItemProductBinding): RecyclerView.
             updateProduktua(products)
         }
         binding.btnMinus.setOnClickListener {
-            if(products.kantitatea == 0){
+            if(products.kantitatea < 1){
                 binding.btnMinus.isEnabled=false
             }else {
                 products.kantitatea--

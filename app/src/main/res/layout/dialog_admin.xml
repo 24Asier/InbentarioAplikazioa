@@ -4,21 +4,26 @@
     android:layout_height="400dp"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/style">
 
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:hint="@string/txtEmail"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@drawable/edit_text_style"/>
     <EditText
         android:id="@+id/txtPassword"
         android:layout_margin="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/txtPassword"
-        android:layout_gravity="center"/>
+        android:inputType="textPassword"
+        android:layout_gravity="center"
+        android:background="@drawable/edit_text_style"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtbtnCheck"
+        android:backgroundTint="@color/blue_dark"
         />
     <Button
         android:id="@+id/btnBack"
@@ -35,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtbtnBack"
+        android:backgroundTint="@color/blue_dark"
         />
     </LinearLayout>
 </LinearLayout>

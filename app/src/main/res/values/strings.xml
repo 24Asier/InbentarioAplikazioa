@@ -35,11 +35,6 @@
     <string name="txtNo">Ez</string>
     <string name="txtMessageAlert">Aukeratu zure erabiltzailea</string>
     <string name="txtProduct"/>
-    <string-array name="products_quantity_options">
-        <item>Guztiak</item>
-        <item>Gutxieneko kantitatea baino gehiago</item>
-        <item>Gutxieneko kantitatea baino gutxiago</item>
-    </string-array>
     <string-array name="enable_options">
         <item>Guztiak</item>
         <item>Gaituta</item>

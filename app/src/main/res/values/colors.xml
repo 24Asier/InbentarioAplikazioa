@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="invisible">#00000000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#9b9b9b</color>
     <color name="red">#FF0000</color>
     <color name="background">#79A9EB</color>
+
+    <color name="blue_primary">#1976D2</color>
+    <color name="blue_dark">#0D47A1</color>
+    <color name="blue_light">#BBDEFB</color>
+
 </resources>

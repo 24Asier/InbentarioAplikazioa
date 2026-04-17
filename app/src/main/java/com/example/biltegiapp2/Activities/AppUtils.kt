@@ -1,10 +1,18 @@
 package com.example.biltegiapp2.Activities
 
+import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Environment
+import android.provider.MediaStore
 
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.example.biltegiapp2.R
 import java.io.File
 import java.text.SimpleDateFormat
@@ -12,7 +20,6 @@ import java.util.Calendar
 import java.util.Locale
 
 object AppUtils {
-
 
     fun uploadImg(imageView: ImageView, imagePathOrName: String, elseImg: String) {
         val file = java.io.File(imagePathOrName)
@@ -112,4 +119,6 @@ object AppUtils {
             false
         }
     }
+
+
 }

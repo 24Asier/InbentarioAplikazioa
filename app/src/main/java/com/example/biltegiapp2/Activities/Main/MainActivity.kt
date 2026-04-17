@@ -1,6 +1,7 @@
 package com.example.biltegiapp2.Activities.Main
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -48,7 +49,7 @@ import java.util.Locale
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var bindingAddProduct: DialogCreateProductBinding
-    private lateinit var bindingAdmin: DialogAdminBinding
+    private lateinit  var bindingAdmin: DialogAdminBinding
     private lateinit var bindingAlert: DialogAlertBinding
     private lateinit var btnMenu: ImageButton
     private lateinit var drawer: DrawerLayout
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnInventory: Button
     private lateinit var spinnerQuantity: Spinner
     private lateinit var spinnerDate: Spinner
-    private lateinit var spinnerType: Spinner
+
     private  var selectedUser: Profila?= null
     private  var productList= mutableListOf<Produktua>()
     private var tempBitmap: Bitmap?= null
@@ -97,11 +98,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        bindingAddProduct= DialogCreateProductBinding.inflate(layoutInflater)
         spinnerQuantity = binding.filterQuantity
         spinnerDate = binding.filterDate
-        spinnerType= bindingAddProduct.spinnerType
-        
+
+
         spinners()
         rvUsers()
         seeMenu()
@@ -148,6 +148,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun addProduct(user: Profila) {
         binding.btnAdd.setOnClickListener {
+            bindingAddProduct = DialogCreateProductBinding.inflate(layoutInflater)
+            val spinnerType= bindingAddProduct.spinnerType
+            spinnersAddProduct(spinnerType)
             val builder= AlertDialog.Builder(this)
             builder.setView(bindingAddProduct.root)
             val alertDialog = builder.create()
@@ -265,7 +268,7 @@ class MainActivity : AppCompatActivity() {
         bindingAdmin.btnCheck.setOnClickListener {
             var isAdmin = false
             for (user in usersList) {
-                if (user.email == bindingAdmin.txtEmail.text.toString() && user.pasahitza == bindingAdmin.txtPassword.text.toString()) {
+                if (user.email == bindingAdmin.txtEmail.text.toString().lowercase().trim() && user.pasahitza == bindingAdmin.txtPassword.text.toString()) {
                     isAdmin = true
                 }
             }
@@ -299,19 +302,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun spinners(){
-        val adapterQuantity = ArrayAdapter.createFromResource(
+        val sortAdapter = ArrayAdapter.createFromResource(
             this,
-            R.array.products_quantity_options,
+            R.array.inventory_sort_options,
             android.R.layout.simple_spinner_dropdown_item
         )
-        adapterQuantity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerQuantity.adapter = adapterQuantity
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerQuantity.adapter = sortAdapter
 
         val adapterDate = ArrayAdapter.createFromResource(
             this,
             R.array.date_filter_options,
             android.R.layout.simple_spinner_dropdown_item
-        )
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
         adapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerDate.adapter = adapterDate
 
@@ -323,7 +328,9 @@ class MainActivity : AppCompatActivity() {
         }
         spinnerQuantity.onItemSelectedListener= listener
         spinnerDate.onItemSelectedListener = listener
+    }
 
+    private fun spinnersAddProduct(spinnerType:Spinner){
         val adapterProductType = ArrayAdapter.createFromResource(
             this,
             R.array.product_type_options,
@@ -338,12 +345,14 @@ class MainActivity : AppCompatActivity() {
         val dB = Datubasea(this@MainActivity)
         val dao = dB.getDAO()
 
-        var filterList: List<Produktua> = productList.toList()
+        var filteredList: List<Produktua> = productList.toList()
 
-        filterList = when (spinnerQuantity.selectedItem.toString()) {
-            "Gutxieneko kantitatea baino gehiago" -> filterList.filter { it.kantitatea > it.gutxienekoKantitatea }
-            "Gutxieneko kantitatea baino gutxiago" -> filterList.filter { it.kantitatea <= it.gutxienekoKantitatea }
-            else -> filterList
+        filteredList = when (spinnerQuantity.selectedItem.toString()) {
+            "A-Z" -> filteredList.sortedBy { it.izena.lowercase() }
+            "Z-A" -> filteredList.sortedByDescending { it.izena.lowercase() }
+            "Kantitate gehienez gutxienez" -> filteredList.sortedByDescending { it.kantitatea }
+            "Kantitate gutxienez gehienez" -> filteredList.sortedBy { it.kantitatea }
+            else -> filteredList
         }
 
         val selectedDateRange = spinnerDate.selectedItem.toString()
@@ -352,7 +361,7 @@ class MainActivity : AppCompatActivity() {
             val today = AppUtils.todayDate()
             val sevenDaysAgo = AppUtils.sevenDaysAgo()
 
-            for (product in filterList) {
+            for (product in filteredList) {
                 val interactions = dao.getInteractionsForProduct(product.prodId)
                 var addProduct = false
                 for (interaction in interactions) {
@@ -368,10 +377,10 @@ class MainActivity : AppCompatActivity() {
                     dateFiltered.add(product)
                 }
             }
-            filterList = dateFiltered
+            filteredList = dateFiltered
         }
 
-        updateAdapter(filterList)
+        updateAdapter(filteredList)
     }
 
     private fun updateAdapter(filterList: List<Produktua>) {
@@ -408,6 +417,7 @@ class MainActivity : AppCompatActivity() {
         rvProducts.visibility = View.VISIBLE
         binding.filterQuantity.visibility = View.VISIBLE
         binding.filterDate.visibility = View.VISIBLE
+        binding.searchProduct.visibility = View.VISIBLE
         binding.btnAdd.visibility = View.VISIBLE
         addProduct(user)
         seeMenu()

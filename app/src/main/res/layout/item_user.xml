@@ -26,6 +26,7 @@
         android:id="@+id/txtUser"
         android:text="thcdfvcdx"
         app:layout_constraintTop_toBottomOf="@id/photoUser"
+        android:textColor="@color/blue_primary"
         />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
