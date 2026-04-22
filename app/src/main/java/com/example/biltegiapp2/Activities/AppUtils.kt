@@ -13,6 +13,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.biltegiapp2.DB.DAO
+import com.example.biltegiapp2.DB.Datubasea
+import com.example.biltegiapp2.DB.Datubasea.Companion.invoke
+import com.example.biltegiapp2.DB.Tablak.Produktua
 import com.example.biltegiapp2.R
 import java.io.File
 import java.text.SimpleDateFormat
@@ -120,5 +124,31 @@ object AppUtils {
         }
     }
 
+    fun isNotRepeatProduct(productName: String, dao: DAO):Boolean{
+        val productList=dao.getAllProducts()
+
+        val isRepeated= productList.any{ it.izena == productName}
+        return isRepeated
+    }
+
+    fun isNotRepeatUser(userNan: String, dao: DAO):Boolean{
+        if (userNan.length < 9) return false
+        val number = userNan.substring(0, 8)
+        val letter= userNan[8]
+        val isValidFormat = number.all { it.isDigit() } && letter.isLetter()
+        if(isValidFormat) {
+            val usersList = dao.getAllProfila()
+            val isRepeated = usersList.any { it.nan == userNan }
+            return isRepeated
+        }
+        return true
+        }
+
+    fun isNotRepeatAlbaran(albaranName: String, dao: DAO):Boolean{
+        val albaranList=dao.getAllProfila()
+
+        val isRepeated= albaranList.any{ it.izena == albaranName}
+        return isRepeated
+    }
 
 }

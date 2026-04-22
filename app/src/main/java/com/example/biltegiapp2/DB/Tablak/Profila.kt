@@ -9,6 +9,7 @@ data class Profila (
     var profilID: Int=0,
     var izena: String,
     var abizena:String,
+    var nan: String,
     var admin: Boolean,
     var img: String,
     var email: String,

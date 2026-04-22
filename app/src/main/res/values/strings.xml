@@ -23,6 +23,7 @@
     <string name="txtCif">CIF</string>
     <string name="txtnewProfile">Profil berria</string>
     <string name="txtSurname">Abizenak</string>
+    <string name="txtNan">Nan-a</string>
     <string name="txtAdmin">Administratzailea</string>
     <string name="txtseeProfile">Ikusi profila</string>
     <string name="txtEnable">Gaitu</string>

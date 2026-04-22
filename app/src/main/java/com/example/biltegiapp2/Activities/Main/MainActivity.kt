@@ -180,7 +180,10 @@ class MainActivity : AppCompatActivity() {
         } else {
             "aliment"
         }
-        if(etName.isEmpty() || etQuantity<0 || etLessQuantity<0 || spinnerTypeValue == "Guztiak" ){
+        val dB = Datubasea(this@MainActivity)
+        val dao = dB.getDAO()
+        val isRepeat= AppUtils.isNotRepeatProduct(etName, dao)
+        if(etName.isEmpty() || etQuantity<0 || etLessQuantity<0 || spinnerTypeValue == "Guztiak" || isRepeat  ){
             Toast.makeText(
                 this,
                 "Datu guztiak sartu behar dira",
@@ -188,8 +191,6 @@ class MainActivity : AppCompatActivity() {
             ).show()
 
         }else{
-            val dB = Datubasea(this@MainActivity)
-            val dao = dB.getDAO()
             val todayDate = AppUtils.todayDate()
 
             Thread {

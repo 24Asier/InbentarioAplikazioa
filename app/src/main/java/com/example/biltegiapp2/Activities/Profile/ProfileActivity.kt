@@ -202,6 +202,7 @@ class ProfileActivity: InactivityPeriodActivity() {
 
         bindingDialogSeeProfile.etName.setText(user.izena)
         bindingDialogSeeProfile.etSurname.setText(user.abizena)
+        bindingDialogSeeProfile.etNan.setText(user.nan)
 
         AppUtils.uploadImg( bindingDialogSeeProfile.imgProfile, user.img, "outline_account_circle_24")
 
@@ -261,6 +262,7 @@ class ProfileActivity: InactivityPeriodActivity() {
     private fun saveProfile(alertDialog: AlertDialog) {
         val etName = bindingDialogProfile.etName.text.toString()
         val etSurname = bindingDialogProfile.etSurname.text.toString()
+        val etNan= bindingDialogProfile.etNan.text.toString()
         val checkAdmin = bindingDialogProfile.checkAdmin.isChecked
         val etEmail = bindingDialogProfile.etSurname.text.toString()
         val etPassword = bindingDialogProfile.etPassword.text.toString()
@@ -269,10 +271,12 @@ class ProfileActivity: InactivityPeriodActivity() {
         } else {
             "outline_account_circle_24"
         }
-        if ((etName.isNotEmpty() && etSurname.isNotEmpty() && !checkAdmin) || (checkAdmin && etEmail.isNotEmpty() && etPassword.isNotEmpty() && etName.isNotEmpty() && etSurname.isNotEmpty())) {
+        val isRepeated = AppUtils.isNotRepeatUser(etNan, dao)
+        if ((etName.isNotEmpty() && etSurname.isNotEmpty() && !checkAdmin) && !isRepeated|| (checkAdmin && etEmail.isNotEmpty() && etPassword.isNotEmpty() && etName.isNotEmpty() && etSurname.isNotEmpty()) && isRepeated) {
             val newProfile = Profila(
                 izena = etName,
                 abizena = etSurname,
+                nan = etNan,
                 admin = checkAdmin,
                 img = cameraImg,
                 email = etEmail,
@@ -295,6 +299,7 @@ class ProfileActivity: InactivityPeriodActivity() {
     private fun updateProfile(user: Profila, alertDialog: AlertDialog){
         val updateName = bindingDialogSeeProfile.etName.text.toString()
         val updateSurname = bindingDialogSeeProfile.etSurname.text.toString()
+        val updateNan = bindingDialogSeeProfile.etNan.text.toString()
         val updateGaituta = bindingDialogSeeProfile.checkEnable.isChecked
         val updateAdmin = bindingDialogSeeProfile.checkAdmin.isChecked
         val updateEmail = bindingDialogSeeProfile.etEmail.text.toString()
@@ -304,12 +309,13 @@ class ProfileActivity: InactivityPeriodActivity() {
         } else {
             user.img
         }
-
-        if((updateName.isNotEmpty() && updateSurname.isNotEmpty() && !updateAdmin) || (updateName.isNotEmpty() && updateSurname.isNotEmpty() && updateAdmin && updateEmail.isNotEmpty() && updatePassword.isNotEmpty() )) {
+        val isRepeated = AppUtils.isNotRepeatUser(updateNan, dao)
+        if((updateName.isNotEmpty() && updateSurname.isNotEmpty() && !updateAdmin) && !isRepeated || (updateName.isNotEmpty() && updateSurname.isNotEmpty() && updateAdmin && updateEmail.isNotEmpty() && updatePassword.isNotEmpty()) && !isRepeated) {
             val updateProfile = Profila(
                 profilID = user.profilID,
                 izena = updateName,
                 abizena = updateSurname,
+                nan = updateNan,
                 admin = updateAdmin,
                 img = cameraImg,
                 email = updateEmail,

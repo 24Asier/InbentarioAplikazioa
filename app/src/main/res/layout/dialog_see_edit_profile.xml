@@ -39,6 +39,13 @@
                 android:layout_margin="20dp"
                 android:hint="@string/txtSurname"
                 android:background="@drawable/edit_text_style"/>
+            <EditText
+                android:id="@+id/etNan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:hint="@string/txtNan"
+                android:background="@drawable/edit_text_style"/>
             <LinearLayout
                 android:id="@+id/adminOptions"
                 android:layout_width="match_parent"

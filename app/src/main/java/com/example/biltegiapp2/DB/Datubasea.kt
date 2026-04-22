@@ -38,12 +38,12 @@ abstract class Datubasea : RoomDatabase(){
         override fun onCreate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
             super.onCreate(db)
             db.execSQL("""
-                    INSERT INTO Profila (profilID, izena, abizena, admin, img, email, pasahitza, gaituta) 
-                    VALUES (1, 'John', 'Doe', 0, 'imagen.jpg', 'john@gmail.com', 'usuario1', 1)
+                    INSERT INTO Profila (profilID, izena, abizena, nan, admin, img, email, pasahitza, gaituta) 
+                    VALUES (1, 'John', 'Doe','11111111A' , 0, 'imagen.jpg', 'john@gmail.com', 'usuario1', 1)
                 """)
             db.execSQL("""
-                    INSERT INTO Profila (profilID, izena, abizena, admin, img, email, pasahitza, gaituta) 
-                    VALUES (2, 'Jane', 'Doe', 1, 'imagen.jpg', 'jane@gmail.com', 'admin1', 1)
+                    INSERT INTO Profila (profilID, izena, abizena, nan,  admin, img, email, pasahitza, gaituta) 
+                    VALUES (2, 'Jane', 'Doe', '22222222B' , 1, 'imagen.jpg', 'jane@gmail.com', 'admin1', 1)
                 """)
             db.execSQL("""
                     INSERT INTO Albaran (albaranId, profilID, izena, cif, img, kantitatea, data, ordainduta) 

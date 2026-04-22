@@ -270,7 +270,8 @@ class AlbaranActivity: InactivityPeriodActivity() {
             "albaran"
         }
         val todayDate = AppUtils.todayDate()
-        if(newName.isNotEmpty() && newQuantity>0) {
+        val isRepeated= AppUtils.isNotRepeatAlbaran(newName, dao)
+        if(newName.isNotEmpty() && newQuantity>0 && !isRepeated) {
             val newAlbaran = Albaran(
                 profilId = currentUser?.profilID?:0,
                 izena = newName,
