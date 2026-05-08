@@ -14,6 +14,7 @@ data class Albaran (
     var cif: String,
     var img:String,
     var kantitatea: Int,
-    var data: String,
+    var sortutakoData: String,
+    var ordaindutakoData: String,
     var ordainduta: Boolean
 )

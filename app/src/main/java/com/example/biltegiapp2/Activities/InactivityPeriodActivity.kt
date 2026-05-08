@@ -9,8 +9,8 @@ import com.example.biltegiapp2.Activities.Main.MainActivity
 open class InactivityPeriodActivity : AppCompatActivity() {
     private val handler= Handler(Looper.getMainLooper())
 
-    //2mins
-    private val inactivity_time: Long= 120000
+    //12mins
+    private val inactivity_time: Long= 720000
 
     fun gotoMain(){
         if(this !is MainActivity){

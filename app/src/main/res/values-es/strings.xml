@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BiltegiApp</string>
+    <string name="aplikazioLogoa">Logotipo de la aplicación</string>
+
+    <string name="titleUsers">Usuarios</string>
+    <string name="txteditProduct">Editar producto</string>
+    <string name="txtProfile">Perfiles</string>
+    <string name="txtAlbaran">Albaranes</string>
+    <string name="txtInventory">Inventario</string>
+
+    <string name="txtName">Nombre</string>
+    <string name="txtSurname">Apellido</string>
+    <string name="txtNan">DNI</string>
+    <string name="txtPassword">Contraseña</string>
+    <string name="txtType">Tipo</string>
+    <string name="txtAmount">Cantidad</string>
+    <string name="txtAmountQuan">Cantidad mínima</string>
+    <string name="txtAdmin">Administrador</string>
+    <string name="txtEnable">Habilitar</string>
+    <string name="txtPaid">Pagado</string>
+    <string name="txtCreatedDate">Fecha de creación</string>
+    <string name="txtPaidedDate">Fecha de pago</string>
+
+    <string name="txtnewProduct">Nuevo producto</string>
+    <string name="txtnewProfile">Nuevo perfil</string>
+    <string name="txtseeProfile">Ver perfil</string>
+    <string name="txtnewAlbaran">Nuevo albarán</string>
+    <string name="txtseeAlbaran">Ver albarán</string>
+    <string name="txtbtnSave">Guardar</string>
+    <string name="txtbtnBack">Atrás</string>
+    <string name="txtbtnDelete">Eliminar</string>
+    <string name="txtbtnCheck">Verificar</string>
+    <string name="txtYes">Si</string>
+    <string name="txtNo">No</string>
+
+    <string name="searchUser">Buscar usuario...</string>
+    <string name="searchProduct">Buscar producto...</string>
+    <string name="searchAlbaran">Buscar albarán...</string>
+    <string name="txtMessageDelete">¿Estás seguro?</string>
+    <string name="txtMessageAlert">Elige tu usuario</string>
+
+    <string-array name="enable_options">
+        <item>Todos</item>
+        <item>Habilitado</item>
+        <item>No habilitado</item>
+    </string-array>
+
+    <string-array name="type_options">
+        <item>Todos</item>
+        <item>Administrador</item>
+        <item>Trabajador</item>
+    </string-array>
+
+    <string-array name="product_type_options">
+        <item>Todos</item>
+        <item>Bebida</item>
+        <item>Comida</item>
+    </string-array>
+
+    <string-array name="albaran_paid_options">
+        <item>Todos</item>
+        <item>Pagado</item>
+        <item>No pagado</item>
+    </string-array>
+
+    <string-array name="inventory_sort_options">
+        <item>Todos</item>
+        <item>A-Z</item>
+        <item>Z-A</item>
+        <item>De mayor cantidad a menor</item>
+        <item>De menor cantidad a mayor</item>
+    </string-array>
+
+    <string-array name="date_filter_options">
+        <item>Todos</item>
+        <item>1 día</item>
+        <item>1 semana</item>
+        <item>1 mes</item>
+    </string-array>
+
+</resources>

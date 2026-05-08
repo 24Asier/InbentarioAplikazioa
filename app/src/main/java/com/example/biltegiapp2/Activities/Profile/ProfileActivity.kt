@@ -149,15 +149,15 @@ class ProfileActivity: InactivityPeriodActivity() {
         if (!::rvProfile.isInitialized) return
         var filterList=usersList
 
-        filterList=when(spinnerType.selectedItem.toString()){
-            "Administratzailea" -> filterList.filter { it.admin }
-            "Langilea" -> filterList.filter { !it.admin }
+        filterList=when(spinnerType.selectedItemPosition){
+            1-> filterList.filter { it.admin }
+            2 -> filterList.filter { !it.admin }
             else -> filterList
         }
 
-        filterList=when(spinnerEnabled.selectedItem.toString()){
-            "Gaituta" -> filterList.filter { it.gaituta }
-            "Ez gaituta" -> filterList.filter { !it.gaituta }
+        filterList=when(spinnerEnabled.selectedItemPosition){
+            1 -> filterList.filter { it.gaituta }
+            2 -> filterList.filter { !it.gaituta }
             else -> filterList
         }
 

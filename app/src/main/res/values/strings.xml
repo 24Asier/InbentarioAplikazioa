@@ -1,46 +1,55 @@
 <resources>
     <string name="app_name">BiltegiApp</string>
-    <string name="aplikazioLogoa">Logotipo de la aplicación</string>
-    <string name="titleUsers">Erabiltzaileak</string>
-    <string name="plus">+</string>
-    <string name="minus">-</string>
-    <string name="back">⬅</string>
+    <string name="aplikazioLogoa">Aplikazioaren logotipoa</string>
+    <string name="back" translatable="false">⬅</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus" translatable="false">-</string>
+
+    <string name="titleUsers">Erablitzaileak</string>
     <string name="txteditProduct">Produktua editatu</string>
     <string name="txtProfile">Profilak</string>
     <string name="txtAlbaran">Albaranak</string>
-    <string name="txtInventory">Inbentarioa</string>
-    <string name="txtnewProduct">Produktu berria</string>
+    <string name="txtInventory">Biltegia</string>
+
     <string name="txtName">Izena</string>
-    <string name="txtAmountQuan">Gutxieneko kantitatea</string>
-    <string name="txtAmount">Kantitatea</string>
-    <string name="txtType">Mota</string>
-    <string name="txtbtnBack">Atzera</string>
-    <string name="txtbtnSave">Gorde</string>
-    <string name="txtEmail">Email</string>
+    <string name="txtSurname">Abizena</string>
+    <string name="txtNan">NAN</string>
+    <string name="txtEmail" translatable="false">Email</string>
     <string name="txtPassword">Pasahitza</string>
-    <string name="txtbtnCheck">Egiaztatu</string>
-    <string name="txtPaid">Ordainduta</string>
-    <string name="txtCif">CIF</string>
-    <string name="txtnewProfile">Profil berria</string>
-    <string name="txtSurname">Abizenak</string>
-    <string name="txtNan">Nan-a</string>
+    <string name="txtCif" translatable="false">CIF</string>
+    <string name="txtType">Mota</string>
+    <string name="txtAmount">Kantitatea</string>
+    <string name="txtAmountQuan">Gutxieneko kantitatea</string>
     <string name="txtAdmin">Administratzailea</string>
-    <string name="txtseeProfile">Ikusi profila</string>
     <string name="txtEnable">Gaitu</string>
-    <string name="txtbtnDelete">Ezabatu</string>
-    <string name="txtseeAlbaran">Ikusi albaran</string>
+    <string name="txtPaid">Ordainduta</string>
+    <string name="txtCreatedDate">Sortze-data</string>
+    <string name="txtPaidedDate">Ordainketa-data</string>
+
+    <string name="txtnewProduct">Produktu berria</string>
+    <string name="txtnewProfile">Profil berria</string>
+    <string name="txtseeProfile">Profil berria</string>
     <string name="txtnewAlbaran">Albaran berria</string>
-    <string name="txtDate">Data</string>
-    <string name="txtMessageDelete">Ziur zaude?</string>
+    <string name="txtseeAlbaran">Ikusi albarana</string>
+    <string name="txtbtnSave">Gorde</string>
+    <string name="txtbtnBack">Atzera</string>
+    <string name="txtbtnDelete">Ezabatu</string>
+    <string name="txtbtnCheck">Egiaztatu</string>
     <string name="txtYes">Bai</string>
     <string name="txtNo">Ez</string>
+
+    <string name="searchUser"> Bilatu erabiltzailea...</string>
+    <string name="searchProduct"> Bilatu produktua...</string>
+    <string name="searchAlbaran"> Bilatu albaran...</string>
+    <string name="txtMessageDelete">Ziur zaude?</string>
     <string name="txtMessageAlert">Aukeratu zure erabiltzailea</string>
-    <string name="txtProduct"/>
+
     <string-array name="enable_options">
         <item>Guztiak</item>
         <item>Gaituta</item>
         <item>Ez gaituta</item>
     </string-array>
+
     <string-array name="type_options">
         <item>Guztiak</item>
         <item>Administratzailea</item>
@@ -52,6 +61,7 @@
         <item>Edaria</item>
         <item>Janaria</item>
     </string-array>
+
     <string-array name="albaran_paid_options">
         <item>Guztiak</item>
         <item>Ordainduta</item>
@@ -71,6 +81,11 @@
         <item>Egun 1</item>
         <item>Aste 1</item>
         <item>Hilabete 1</item>
+    </string-array>
+
+    <string-array name="lang_options" translatable="false">
+        <item>EU</item>
+        <item>ES</item>
     </string-array>
 
 </resources>

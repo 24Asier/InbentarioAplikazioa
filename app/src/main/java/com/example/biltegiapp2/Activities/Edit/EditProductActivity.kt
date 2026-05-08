@@ -154,16 +154,16 @@ class EditProductActivity: InactivityPeriodActivity() {
         if (!::rvProduct.isInitialized) return
         var filterList=productsList
 
-        filterList=when(spinnerType.selectedItem.toString()){
-            "Edaria" -> filterList.filter {it.mota.equals("edaria", ignoreCase = true) }
-            "Janaria" -> filterList.filter { it.mota.equals("janaria", ignoreCase = true) }
+        filterList=when(spinnerType.selectedItemPosition){
+            1 -> filterList.filter {it.mota.equals("edaria", ignoreCase = true)  }
+            2-> filterList.filter { it.mota.equals("janaria", ignoreCase = true) }
             else -> filterList
         }
 
-        val selectedDateRange = spinnerDate.selectedItem.toString()
-        if (selectedDateRange.lowercase(Locale.getDefault()) != "guztiak") {
+        val selectedDatePos = spinnerDate.selectedItemPosition
+        if (selectedDatePos!=0) {
             filterList = filterList.filter { product ->
-                interakzioakList.any { it.prodId == product.prodId && AppUtils.isWithinRange(it.dataInter, selectedDateRange) }
+                interakzioakList.any { it.prodId == product.prodId && AppUtils.isWithinRange(it.dataInter, selectedDatePos) }
             }
         }
 

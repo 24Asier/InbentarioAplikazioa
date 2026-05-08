@@ -48,15 +48,29 @@
                 android:layout_margin="20dp"
                 android:hint="@string/txtAmount"
                 android:background="@drawable/edit_text_style"/>
-            <EditText
-                android:id="@+id/etDate"
+            <LinearLayout
+                android:id="@+id/Dates"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:hint="@string/txtDate"
-                android:visibility="gone"
-                android:background="@drawable/edit_text_style"
-                />
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone">
+                <EditText
+                    android:id="@+id/etCreatedDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txtCreatedDate"
+                    android:textSize="12sp"
+                    android:background="@drawable/edit_text_style"/>
+                <EditText
+                    android:id="@+id/etPaidedDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txtPaidedDate"
+                    android:layout_marginStart="12sp"
+                    android:textSize="12sp"
+                    android:background="@drawable/edit_text_style"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

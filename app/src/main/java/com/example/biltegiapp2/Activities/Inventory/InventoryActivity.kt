@@ -109,14 +109,15 @@ class InventoryActivity: InactivityPeriodActivity() {
     }
 
     private fun applyFilterAndSort() {
-        val selectedType = binding.spinnerType.selectedItem.toString()
-        val selectedSort = binding.spinerDate.selectedItem.toString()
+        val selectedType = binding.spinnerType.selectedItemPosition
+        val selectedSort = binding.spinerDate.selectedItemPosition
 
         // Filtra por tipo de producto
-        var filteredList = if (selectedType == "Guztiak") {
+        var filteredList = if (selectedType == 0) {
             allProducts
         } else {
-            allProducts.filter { it.mota == selectedType }
+            val typeSelectedString = binding.spinnerType.selectedItem.toString()
+            allProducts.filter { it.mota == typeSelectedString }
         }
 
         // Filtra por búsqueda
@@ -128,10 +129,10 @@ class InventoryActivity: InactivityPeriodActivity() {
 
         // Ordena la lista
         filteredList = when (selectedSort) {
-            "A-Z" -> filteredList.sortedBy { it.izena.lowercase() }
-            "Z-A" -> filteredList.sortedByDescending { it.izena.lowercase() }
-            "Kantitate gehienez gutxienez" -> filteredList.sortedByDescending { it.kantitatea }
-            "Kantitate gutxienez gehienez" -> filteredList.sortedBy { it.kantitatea }
+            1 -> filteredList.sortedBy { it.izena.lowercase() }
+            2 -> filteredList.sortedByDescending { it.izena.lowercase() }
+            3 -> filteredList.sortedByDescending { it.kantitatea }
+            4 -> filteredList.sortedBy { it.kantitatea }
             else -> filteredList
         }
 

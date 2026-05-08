@@ -33,6 +33,7 @@ import com.example.biltegiapp2.DB.Tablak.Albaran
 import com.example.biltegiapp2.DB.Tablak.Profila
 import com.example.biltegiapp2.R
 import com.example.biltegiapp2.databinding.ActivityAlbaranBinding
+import com.example.biltegiapp2.databinding.DialogAlertBinding
 import com.example.biltegiapp2.databinding.DialogSeeEditNewAlbaranBinding
 import java.util.Locale
 
@@ -40,6 +41,7 @@ class AlbaranActivity: InactivityPeriodActivity() {
 
     private lateinit var binding: ActivityAlbaranBinding
     private lateinit var bindingDialogAlbaran: DialogSeeEditNewAlbaranBinding
+    private lateinit var bindingAlertDialog: DialogAlertBinding
     private lateinit var rvAlbarans: RecyclerView
     private lateinit var btnAddAlbaran: Button
     private lateinit var btnBackMain: Button
@@ -49,7 +51,7 @@ class AlbaranActivity: InactivityPeriodActivity() {
     private lateinit var spinnerDate: Spinner
     private lateinit var albaranList: List<Albaran>
     private var currentUser: Profila? = null
-    private var tempBitmap: Bitmap?= null
+    private var tempBitmap: Bitmap? = null
     private var currentQuery: String = ""
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -62,13 +64,14 @@ class AlbaranActivity: InactivityPeriodActivity() {
         }
     }
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val imageBitmap = result.data?.extras?.get("data") as? Bitmap
-            tempBitmap= imageBitmap
-            bindingDialogAlbaran.imgAlbaran.setImageBitmap(imageBitmap)
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val imageBitmap = result.data?.extras?.get("data") as? Bitmap
+                tempBitmap = imageBitmap
+                bindingDialogAlbaran.imgAlbaran.setImageBitmap(imageBitmap)
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,13 +83,13 @@ class AlbaranActivity: InactivityPeriodActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        rvAlbarans=binding.rvAlbarans
+        rvAlbarans = binding.rvAlbarans
         rvAlbarans.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rvAlbarans.layoutManager=androidx.recyclerview.widget.GridLayoutManager(this, 4)
-        val dB= Datubasea(this)
-        dao= dB.getDAO()
-        albaranList= dao.getAllAlbaran()
-        currentUser= intent.getSerializableExtra("logged_user") as? Profila
+        rvAlbarans.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this, 4)
+        val dB = Datubasea(this)
+        dao = dB.getDAO()
+        albaranList = dao.getAllAlbaran()
+        currentUser = intent.getSerializableExtra("logged_user") as? Profila
         newAlbaran()
         backMain()
         spinners()
@@ -114,9 +117,15 @@ class AlbaranActivity: InactivityPeriodActivity() {
         spinnerDate.adapter = adapterDate
 
         val listener = object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: android.widget.AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 applyFilters()
             }
+
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
         }
         spinnerPaid.onItemSelectedListener = listener
@@ -137,18 +146,18 @@ class AlbaranActivity: InactivityPeriodActivity() {
         })
     }
 
-    private fun applyFilters(){
+    private fun applyFilters() {
         if (!::rvAlbarans.isInitialized) return
-        var filterList=albaranList
+        var filterList = albaranList
 
-        filterList=when(spinnerPaid.selectedItem.toString()){
-            "Ordainduta" -> filterList.filter { it.ordainduta }
-            "Ordaindu gabe" -> filterList.filter { !it.ordainduta }
+        filterList = when (spinnerPaid.selectedItemPosition) {
+            1 -> filterList.filter { it.ordainduta }
+            2 -> filterList.filter { !it.ordainduta }
             else -> filterList
         }
 
-        val selectedDateRange = spinnerDate.selectedItem.toString()
-        filterList = filterList.filter { AppUtils.isWithinRange(it.data, selectedDateRange) }
+        val selectedDatePos = spinnerDate.selectedItemPosition
+        filterList = filterList.filter { AppUtils.isWithinRange(it.sortutakoData, selectedDatePos) }
 
         if (currentQuery.isNotEmpty()) {
             filterList = filterList.filter {
@@ -162,71 +171,84 @@ class AlbaranActivity: InactivityPeriodActivity() {
             onItemSelected(albaran)
         }
     }
-    private fun onItemSelected(albaran: Albaran){
-        bindingDialogAlbaran= DialogSeeEditNewAlbaranBinding.inflate(layoutInflater)
-        val builder= AlertDialog.Builder(this)
+
+    private fun onItemSelected(albaran: Albaran) {
+        bindingDialogAlbaran = DialogSeeEditNewAlbaranBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this)
         builder.setView(bindingDialogAlbaran.root)
         val alertDialog = builder.create()
         bindingDialogAlbaran.btnBackAlbaran.setOnClickListener {
             alertDialog.dismiss()
         }
         bindingDialogAlbaran.title.setText(R.string.txtseeAlbaran)
-        bindingDialogAlbaran.btnDelete.visibility= View.INVISIBLE
         bindingDialogAlbaran.etName.setText(albaran.izena)
         bindingDialogAlbaran.etCif.setText(albaran.cif)
         bindingDialogAlbaran.etQuantity.setText(albaran.kantitatea.toString())
-        bindingDialogAlbaran.etDate.setText(albaran.data)
-        bindingDialogAlbaran.etDate.visibility= View.VISIBLE
-        bindingDialogAlbaran.etDate.isEnabled=false
+        bindingDialogAlbaran.etCreatedDate.setText(albaran.sortutakoData)
+        bindingDialogAlbaran.etCreatedDate.isEnabled = false
+        if (albaran.ordaindutakoData.isNotEmpty()) {
+            bindingDialogAlbaran.etPaidedDate.setText(albaran.ordaindutakoData)
+
+        } else {
+            bindingDialogAlbaran.etPaidedDate.setText("")
+        }
+        bindingDialogAlbaran.etPaidedDate.isEnabled = false
+        bindingDialogAlbaran.Dates.visibility = View.VISIBLE
+
         AppUtils.uploadImg(bindingDialogAlbaran.imgAlbaran, albaran.img, "albaran")
-        if(albaran.ordainduta) {
-            bindingDialogAlbaran.cbPaid.isChecked=true
+        if (albaran.ordainduta) {
+            bindingDialogAlbaran.cbPaid.isChecked = true
         }
         bindingDialogAlbaran.btnSave.setOnClickListener {
             updateAlbaran(albaran, alertDialog)
         }
 
         bindingDialogAlbaran.btnDelete.setOnClickListener {
+            deleteAlbaran(albaran, alertDialog)
         }
         alertDialog.show()
-        imgAlbaran= bindingDialogAlbaran.imgAlbaran
+        imgAlbaran = bindingDialogAlbaran.imgAlbaran
         imgAlbaran.setOnClickListener {
             checkCameraPermission()
         }
     }
-    private fun updateAlbaran(albaran: Albaran, alertDialog: AlertDialog){
+
+    private fun updateAlbaran(albaran: Albaran, alertDialog: AlertDialog) {
         val updateName = bindingDialogAlbaran.etName.text.toString()
         val updateQuantity = bindingDialogAlbaran.etQuantity.text.toString()
         val updateCif = bindingDialogAlbaran.etCif.text.toString()
         val updatePaid = bindingDialogAlbaran.cbPaid.isChecked
+
         val cameraImg: String = if (tempBitmap != null) {
             AppUtils.savePhoto(this, tempBitmap!!, updateName, "albaran")
         } else {
             albaran.img
         }
-
-        if(updateName.isNotEmpty() && updateQuantity.isNotEmpty()) {
+        if (updateName.isNotEmpty() && updateQuantity.isNotEmpty()) {
             val updateAlbaran = Albaran(
                 albaranId = albaran.albaranId,
-                profilId = currentUser?.profilID?:0,
+                profilId = currentUser?.profilID ?: 0,
                 izena = updateName,
                 cif = updateCif,
                 img = cameraImg,
-                kantitatea= updateQuantity.toInt(),
-                data= AppUtils.todayDate(),
+                kantitatea = updateQuantity.toInt(),
+                sortutakoData = albaran.sortutakoData,
+                ordaindutakoData = if (updatePaid) AppUtils.todayDate() else "",
                 ordainduta = updatePaid
             )
+
             dao.updateAlbaran(updateAlbaran)
             albaranList = dao.getAllAlbaran()
-            
+
             applyFilters()
             alertDialog.dismiss()
             Toast.makeText(this, "Gordeta!", Toast.LENGTH_SHORT)
                 .show()
-        }else {
+        } else {
             Toast.makeText(this, "Bete eremu guztiak", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun backMain() {
         btnBackMain= binding.btnBackMain
@@ -246,6 +268,8 @@ class AlbaranActivity: InactivityPeriodActivity() {
             builder.setView(bindingDialogAlbaran.root)
             val alertDialog = builder.create()
             bindingDialogAlbaran.title.text= getString(R.string.txtnewAlbaran)
+            bindingDialogAlbaran.btnDelete.visibility= View.INVISIBLE
+            bindingDialogAlbaran.Dates.visibility= View.GONE
             bindingDialogAlbaran.imgAlbaran.setOnClickListener {
                 checkCameraPermission()
             }
@@ -259,7 +283,6 @@ class AlbaranActivity: InactivityPeriodActivity() {
         }
     }
     private fun addAlbaran(alertDialog: AlertDialog){
-
         val newName = bindingDialogAlbaran.etName.text.toString()
         val newQuantity = bindingDialogAlbaran.etQuantity.text.toString().toIntOrNull() ?: -1
         val newCif = bindingDialogAlbaran.etCif.text.toString()
@@ -278,7 +301,8 @@ class AlbaranActivity: InactivityPeriodActivity() {
                 cif = newCif,
                 img = cameraImg,
                 kantitatea= newQuantity,
-                data= todayDate,
+                sortutakoData =AppUtils.todayDate(),
+                ordaindutakoData = "",
                 ordainduta = newPaid
             )
             dao.insertAlbaran(newAlbaran)
@@ -291,6 +315,29 @@ class AlbaranActivity: InactivityPeriodActivity() {
         }else {
             Toast.makeText(this, "Bete eremu guztiak", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun deleteAlbaran(albaran: Albaran, alertDialogSeeProfile: AlertDialog){
+        bindingAlertDialog= DialogAlertBinding.inflate(layoutInflater)
+        val builder= AlertDialog.Builder(this)
+        bindingAlertDialog.tvMessage.setText(R.string.txtMessageDelete)
+        bindingAlertDialog.btnYes.setText(R.string.txtYes)
+        bindingAlertDialog.btnNo.setText(R.string.txtNo)
+        builder.setView(bindingAlertDialog.root)
+        val alertDialog = builder.create()
+        bindingAlertDialog.btnNo.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        bindingAlertDialog.btnYes.setOnClickListener {
+            dao.deleteAlbaran(albaran)
+            albaranList= dao.getAllAlbaran()
+            applyFilters()
+            alertDialog.dismiss()
+            alertDialogSeeProfile.dismiss()
+            Toast.makeText(this, "Ezabatu da", Toast.LENGTH_SHORT).show()
+        }
+        alertDialog.show()
+
     }
 
     private fun checkCameraPermission() {

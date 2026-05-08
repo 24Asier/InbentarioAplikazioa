@@ -46,12 +46,12 @@ abstract class Datubasea : RoomDatabase(){
                     VALUES (2, 'Jane', 'Doe', '22222222B' , 1, 'imagen.jpg', 'jane@gmail.com', 'admin1', 1)
                 """)
             db.execSQL("""
-                    INSERT INTO Albaran (albaranId, profilID, izena, cif, img, kantitatea, data, ordainduta) 
-                    VALUES (1, 1, 'albaran1', 'B12345678', 'albaran1.jpg', 100, '01-01-2026', 0)
+                    INSERT INTO Albaran (albaranId, profilID, izena, cif, img, kantitatea, sortutakoData, ordaindutakoData , ordainduta) 
+                    VALUES (1, 1, 'albaran1', 'B12345678', 'albaran1.jpg', 100, '01-01-2026', "", 0)
                 """)
             db.execSQL("""
-                    INSERT INTO Albaran (albaranId, profilID, izena, cif, img, kantitatea, data, ordainduta) 
-                    VALUES (2, 2, 'albaran2', 'A12345678', 'albaran2.jpg', 190, '03-01-2026', 1)
+                    INSERT INTO Albaran (albaranId, profilID, izena, cif, img, kantitatea, sortutakoData, ordaindutakoData , ordainduta) 
+                    VALUES (2, 2, 'albaran2', 'A12345678', 'albaran2.jpg', 190, '03-01-2026', '05-01-2026',  1)
                 """)
             db.execSQL("""
                     INSERT INTO Produktua (prodId, izena, img, mota, gaituta, kantitatea, gutxienekoKantitatea) 

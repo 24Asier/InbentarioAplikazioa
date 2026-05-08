@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
-            app:queryHint="Bilatu produktua..."
+            app:queryHint="@string/searchProduct"
             android:background="@drawable/style"
             />
     </LinearLayout>

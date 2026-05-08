@@ -24,7 +24,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,9 +48,15 @@ import com.example.biltegiapp2.databinding.ActivityMainBinding
 import com.example.biltegiapp2.databinding.DialogAdminBinding
 import com.example.biltegiapp2.databinding.DialogAlertBinding
 import com.example.biltegiapp2.databinding.DialogCreateProductBinding
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
+private val Context.dataStore by preferencesDataStore(name="settings")
 
 class MainActivity : AppCompatActivity() {
+
+    private val LANGUAGE_KEY = stringPreferencesKey("SelectedLanguage")
     private lateinit var binding: ActivityMainBinding
     private lateinit var bindingAddProduct: DialogCreateProductBinding
     private lateinit  var bindingAdmin: DialogAdminBinding
@@ -61,6 +71,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAlbaran: Button
     private lateinit var usersList: List<Profila>
     private lateinit var btnInventory: Button
+
+    private var isFirstSelection = true
+    private lateinit var spinnerLang:Spinner
     private lateinit var spinnerQuantity: Spinner
     private lateinit var spinnerDate: Spinner
 
@@ -89,6 +102,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadLocale()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -106,7 +120,88 @@ class MainActivity : AppCompatActivity() {
         rvUsers()
         seeMenu()
         setupSearchView()
+        spinnerLang()
 
+        val restoredUserId = intent.getIntExtra("RESTORE_USER_ID", -1)
+        if (restoredUserId != -1) {
+            val dB = Datubasea(this)
+            val dao = dB.getDAO()
+
+            Thread {
+                val user = dao.getAllProfila().find { it.profilID == restoredUserId }
+                runOnUiThread {
+                    if (user != null) {
+                        onItemSelected(user)
+                    }
+                }
+            }.start()
+        }
+    }
+    private fun loadLocale() {
+        val lang = runBlocking {
+            dataStore.data.first()[LANGUAGE_KEY] ?: "eu"
+        }
+        saveLanguage(lang)
+    }
+    private fun saveLanguage(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+    }
+
+    fun updateLanguage(languageCode: String) {
+        lifecycleScope.launch {
+            dataStore.edit { it[LANGUAGE_KEY] = languageCode }
+
+            saveLanguage(languageCode)
+
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            selectedUser?.let {
+                intent.putExtra("RESTORE_USER_ID", it.profilID)
+            }
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish() 
+        }
+    }
+    private fun spinnerLang() {
+        spinnerLang = binding.langSpinner
+        val currentLang = resources.configuration.locales.get(0).language
+
+        val sortAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.lang_options,
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerLang.adapter = sortAdapter
+
+        if (currentLang == "eu") {
+            spinnerLang.setSelection(0)
+        } else {
+            spinnerLang.setSelection(1)
+        }
+
+        spinnerLang.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (isFirstSelection) {
+                    isFirstSelection = false
+                    return
+                }
+
+                val selectedLangText = parent?.getItemAtPosition(position).toString()
+                val currentAppLang = resources.configuration.locales.get(0).language
+
+                when (selectedLangText) {
+                    "ES"-> {if (currentAppLang != "es") updateLanguage("es") }
+                    "EU"-> {if (currentAppLang != "eu") updateLanguage("eu") }
+                }
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
+        }
     }
 
 
@@ -342,22 +437,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyFilters() {
-        if (!::rvProducts.isInitialized || selectedUser == null) return
+        if (!::rvProducts.isInitialized || selectedUser == null|| selectedUser== null) return
         val dB = Datubasea(this@MainActivity)
         val dao = dB.getDAO()
 
         var filteredList: List<Produktua> = productList.toList()
 
-        filteredList = when (spinnerQuantity.selectedItem.toString()) {
-            "A-Z" -> filteredList.sortedBy { it.izena.lowercase() }
-            "Z-A" -> filteredList.sortedByDescending { it.izena.lowercase() }
-            "Kantitate gehienez gutxienez" -> filteredList.sortedByDescending { it.kantitatea }
-            "Kantitate gutxienez gehienez" -> filteredList.sortedBy { it.kantitatea }
+        filteredList = when (spinnerQuantity.selectedItemPosition) {
+            1 -> filteredList.sortedBy { it.izena.lowercase() }
+            2 -> filteredList.sortedByDescending { it.izena.lowercase() }
+            3  -> filteredList.sortedByDescending { it.kantitatea }
+            4-> filteredList.sortedBy { it.kantitatea }
             else -> filteredList
         }
 
-        val selectedDateRange = spinnerDate.selectedItem.toString()
-        if (selectedDateRange.lowercase(Locale.getDefault()) != "guztiak") {
+        val selectedDatePos = spinnerDate.selectedItemPosition
+        if (selectedDatePos !=0) {
             val dateFiltered = mutableListOf<Produktua>()
             val today = AppUtils.todayDate()
             val sevenDaysAgo = AppUtils.sevenDaysAgo()
@@ -367,10 +462,10 @@ class MainActivity : AppCompatActivity() {
                 var addProduct = false
                 for (interaction in interactions) {
                     if (interaction.profilId == selectedUser?.profilID) {
-                        when (selectedDateRange) {
-                            "Egun 1" -> if (interaction.dataInter == today) addProduct = true
-                            "Aste 1" -> if (interaction.dataInter >= sevenDaysAgo && interaction.dataInter != today) addProduct = true
-                            "Hilabete 1" -> if (AppUtils.isWithinRange(interaction.dataInter, selectedDateRange)) addProduct = true
+                        when (selectedDatePos) {
+                           1 -> if (interaction.dataInter == today) addProduct = true
+                            2-> if (interaction.dataInter >= sevenDaysAgo && interaction.dataInter != today) addProduct = true
+                            3-> if (AppUtils.isWithinRange(interaction.dataInter, selectedDatePos)) addProduct = true
                         }
                     }
                 }
@@ -434,10 +529,8 @@ class MainActivity : AppCompatActivity() {
             val allProducts = dAO.getAllProducts().filter { it.gaituta }
             val interactions = dAO.getInterakzioakByProfilId(user.profilID)
 
-            // Usar set de IDs interactuados para búsqueda eficiente
             val interactedIds = interactions.map { it.prodId }.toSet()
 
-            // Ordenar por interacciones recientes pero asegurando que TODOS los productos aparezcan
             val baseList = allProducts.sortedByDescending { product ->
                 interactions.filter { it.prodId == product.prodId }.maxOfOrNull { it.dataInter } ?: ""
             }

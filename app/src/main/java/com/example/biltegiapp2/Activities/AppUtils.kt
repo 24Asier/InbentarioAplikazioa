@@ -76,8 +76,8 @@ object AppUtils {
         return dateFormat.format(calendar.time)
     }
 
-    fun isWithinRange(dateString: String, range: String): Boolean {
-        if (range.equals("guztiak", ignoreCase = true)) return true
+    fun isWithinRange(dateString: String, range: Int): Boolean {
+        if (range == 0) return true
         
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return try {
@@ -107,14 +107,14 @@ object AppUtils {
             monthAgoCalendar.add(Calendar.MONTH, -1)
             val monthAgoStart = monthAgoCalendar.timeInMillis
 
-            when (range.lowercase(Locale.getDefault())) {
-                "egun 1" -> {
+            when (range) {
+                1 -> {
                     interactionTime >= todayStart
                 }
-                "aste 1" -> {
+                2 -> {
                     interactionTime < todayStart && interactionTime >= weekAgoStart
                 }
-                "hilabete 1" -> {
+                3 -> {
                     interactionTime < weekAgoStart && interactionTime >= monthAgoStart
                 }
                 else -> true

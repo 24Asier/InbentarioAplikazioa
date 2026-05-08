@@ -14,26 +14,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
        >
-
-        <TextView
-            android:id="@+id/titleMain"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/titleUsers"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/blue_primary"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
+            app:layout_constraintBottom_toTopOf="@id/rvUsers">
+
+            <TextView
+                android:id="@+id/titleMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/titleUsers"
+                android:textColor="@color/blue_primary"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/lang_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/style" />
+
+        </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/titleMain"
-
-            />
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!--android:visibility="invisible"-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:iconifiedByDefault="false"
-                    app:queryHint="Bilatu produktua..."
+                    app:queryHint="@string/searchProduct"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/style"
                     />
