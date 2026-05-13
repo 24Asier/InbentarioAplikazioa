@@ -10,7 +10,7 @@ import com.example.biltegiapp2.DB.Tablak.Interakzioa
 import com.example.biltegiapp2.DB.Tablak.Produktua
 import com.example.biltegiapp2.DB.Tablak.Profila
 
-@Database (entities = [Profila::class, Albaran::class, Interakzioa::class, Produktua::class], version = 2)
+@Database (entities = [Profila::class, Albaran::class, Interakzioa::class, Produktua::class], version = 3)
 @TypeConverters(DateTimeConverter::class)
 abstract class Datubasea : RoomDatabase(){
     companion object{
@@ -62,12 +62,12 @@ abstract class Datubasea : RoomDatabase(){
                     VALUES (2, 'Produktua2', 'prod2.jpg', 'janaria', 1, 50, 10)
                 """)
             db.execSQL("""
-                    INSERT INTO Interakzioa (interId, profilId, prodId, dataInter) 
-                    VALUES (1, 1, 1, '01-10-2023')
+                    INSERT INTO Interakzioa (interId, profilId, prodId, dataInter, akzioa) 
+                    VALUES (1, 1, 1, '01-10-2023', 'CREATE')
                 """)
             db.execSQL("""
-                    INSERT INTO Interakzioa (interId, profilId, prodId, dataInter) 
-                    VALUES (2, 2, 2, '01-10-2023')
+                    INSERT INTO Interakzioa (interId, profilId, prodId, dataInter, akzioa) 
+                    VALUES (2, 2, 2, '01-10-2023', 'UPDATE')
                 """)
         }
     }

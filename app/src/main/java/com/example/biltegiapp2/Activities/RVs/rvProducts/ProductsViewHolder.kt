@@ -7,11 +7,12 @@ import com.example.biltegiapp2.DB.Tablak.Produktua
 import com.example.biltegiapp2.databinding.ItemProductBinding
 import androidx.core.content.ContextCompat
 import android.graphics.Color
+import com.example.biltegiapp2.DB.Tablak.AkzioMota
 
 class ProductsViewHolder(private val binding: ItemProductBinding): RecyclerView.ViewHolder(binding.root) {
     val context = binding.root.context
 
-    fun render(products: Produktua, updateProduktua: (Produktua) -> Unit){
+    fun render(products: Produktua, updateProduktua: (Produktua, AkzioMota) -> Unit){
         if(products.kantitatea<=products.gutxienekoKantitatea){
             val border = 9* context.resources.displayMetrics.density
             binding.imgAliment.strokeWidth= border
@@ -34,7 +35,7 @@ class ProductsViewHolder(private val binding: ItemProductBinding): RecyclerView.
         binding.btnPlus.setOnClickListener {
             products.kantitatea++
             binding.txtQuatity.setText(products.kantitatea.toString())
-            updateProduktua(products)
+            updateProduktua(products, AkzioMota.ADD_QUANTITY)
         }
         binding.btnMinus.setOnClickListener {
             if(products.kantitatea < 1){
@@ -42,7 +43,7 @@ class ProductsViewHolder(private val binding: ItemProductBinding): RecyclerView.
             }else {
                 products.kantitatea--
                 binding.txtQuatity.setText(products.kantitatea.toString())
-                updateProduktua(products)
+                updateProduktua(products, AkzioMota.REMOVE_QUANTITY)
             }
         }
     }

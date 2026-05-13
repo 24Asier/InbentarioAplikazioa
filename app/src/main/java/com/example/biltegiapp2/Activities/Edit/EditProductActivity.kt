@@ -27,6 +27,7 @@ import com.example.biltegiapp2.Activities.Main.MainActivity
 import com.example.biltegiapp2.Activities.RVs.rvEditProduct.EditProductAdapter
 import com.example.biltegiapp2.DB.DAO
 import com.example.biltegiapp2.DB.Datubasea
+import com.example.biltegiapp2.DB.Tablak.AkzioMota
 import com.example.biltegiapp2.DB.Tablak.Interakzioa
 import com.example.biltegiapp2.DB.Tablak.Produktua
 import com.example.biltegiapp2.DB.Tablak.Profila
@@ -245,11 +246,19 @@ class EditProductActivity: InactivityPeriodActivity() {
                 kantitatea = updateQuantity,
                 gutxienekoKantitatea= updateLessQuantity
             )
+
+            val akzioa = when {
+                updateQuantity > product.kantitatea -> AkzioMota.ADD_QUANTITY
+                updateQuantity < product.kantitatea -> AkzioMota.REMOVE_QUANTITY
+                else -> AkzioMota.UPDATE
+            }
+
             val todayDate = AppUtils.todayDate()
             val newInteraction= Interakzioa(
                 profilId = currentUser?.profilID ?:0,
                 prodId = product.prodId,
-                dataInter = todayDate
+                dataInter = todayDate,
+                akzioa = akzioa
             )
             dao.updateProduktua(updateProduct)
             dao.insertInterakzioa(newInteraction)
@@ -276,6 +285,14 @@ class EditProductActivity: InactivityPeriodActivity() {
             alertDialog.dismiss()
         }
         bindingAlertDialog.btnYes.setOnClickListener {
+            val todayDate = AppUtils.todayDate()
+            val deleteInteraction = Interakzioa(
+                profilId = currentUser?.profilID ?: 0,
+                prodId = product.prodId,
+                dataInter = todayDate,
+                akzioa = AkzioMota.DELETE
+            )
+            dao.insertInterakzioa(deleteInteraction)
             dao.deleteProduktua(product)
             productsList= dao.getAllProducts()
             interakzioakList = dao.getAllInterakzioak()

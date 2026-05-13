@@ -40,6 +40,7 @@ import com.example.biltegiapp2.Activities.RVs.rvProducts.ProductsAdapter
 import com.example.biltegiapp2.Activities.RVs.rvUsers.UsersAdapter
 import com.example.biltegiapp2.Activities.Profile.ProfileActivity
 import com.example.biltegiapp2.DB.Datubasea
+import com.example.biltegiapp2.DB.Tablak.AkzioMota
 import com.example.biltegiapp2.DB.Tablak.Interakzioa
 import com.example.biltegiapp2.DB.Tablak.Produktua
 import com.example.biltegiapp2.DB.Tablak.Profila
@@ -301,7 +302,8 @@ class MainActivity : AppCompatActivity() {
                 val interaction = Interakzioa(
                     profilId = user.profilID,
                     prodId = newProdId.toInt(),
-                    dataInter = todayDate
+                    dataInter = todayDate,
+                    akzioa = AkzioMota.CREATE
                 )
                 dao.insertInterakzioa(interaction)
                 runOnUiThread {
@@ -486,7 +488,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         rvProducts.layoutManager = GridLayoutManager(this, 3)
-        rvProducts.adapter = ProductsAdapter(finalList) { updateProduct ->
+        rvProducts.adapter = ProductsAdapter(finalList) { updateProduct, akzioa ->
             val dB = Datubasea(this)
             val dAO = dB.getDAO()
             Thread {
@@ -495,7 +497,8 @@ class MainActivity : AppCompatActivity() {
                     val interaction = Interakzioa(
                         profilId = user.profilID,
                         prodId = updateProduct.prodId,
-                        dataInter = AppUtils.todayDate()
+                        dataInter = AppUtils.todayDate(),
+                        akzioa = akzioa
                     )
                     dAO.insertInterakzioa(interaction)
 

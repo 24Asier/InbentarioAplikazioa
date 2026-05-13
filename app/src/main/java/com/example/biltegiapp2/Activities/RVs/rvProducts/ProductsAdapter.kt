@@ -1,18 +1,13 @@
 package com.example.biltegiapp2.Activities.RVs.rvProducts
 
-import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.biltegiapp2.Activities.RVs.rvEditProduct.EditProductViewHolder
-import com.example.biltegiapp2.DB.Datubasea
-
-
+import com.example.biltegiapp2.DB.Tablak.AkzioMota
 import com.example.biltegiapp2.DB.Tablak.Produktua
-import com.example.biltegiapp2.R
 import com.example.biltegiapp2.databinding.ItemProductBinding
 
-class ProductsAdapter (private val products: List<Produktua>, private val updateProduktua: (Produktua) -> Unit): RecyclerView.Adapter<ProductsViewHolder>() {
+class ProductsAdapter (private val products: List<Produktua>, private val updateProduktua: (Produktua, AkzioMota) -> Unit): RecyclerView.Adapter<ProductsViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
