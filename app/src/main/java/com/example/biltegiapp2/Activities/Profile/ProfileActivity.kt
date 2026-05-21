@@ -264,7 +264,7 @@ class ProfileActivity: InactivityPeriodActivity() {
         val etSurname = bindingDialogProfile.etSurname.text.toString()
         val etNan= bindingDialogProfile.etNan.text.toString()
         val checkAdmin = bindingDialogProfile.checkAdmin.isChecked
-        val etEmail = bindingDialogProfile.etSurname.text.toString()
+        val etEmail = bindingDialogProfile.etEmail.text.toString()
         val etPassword = bindingDialogProfile.etPassword.text.toString()
         val cameraImg: String = if (tempBitmap != null) {
             AppUtils.savePhoto(this, tempBitmap!!, etName, "outline_account_circle_24")
@@ -272,7 +272,7 @@ class ProfileActivity: InactivityPeriodActivity() {
             "outline_account_circle_24"
         }
         val isRepeated = AppUtils.isNotRepeatUser(etNan, dao)
-        if ((etName.isNotEmpty() && etSurname.isNotEmpty() && !checkAdmin) && !isRepeated|| (checkAdmin && etEmail.isNotEmpty() && etPassword.isNotEmpty() && etName.isNotEmpty() && etSurname.isNotEmpty()) && isRepeated) {
+        if  ((etName.isNotEmpty() && etSurname.isNotEmpty() && !isRepeated) && (!checkAdmin || (checkAdmin && etEmail.isNotEmpty() && etPassword.isNotEmpty())))  {
             val newProfile = Profila(
                 izena = etName,
                 abizena = etSurname,
@@ -309,8 +309,7 @@ class ProfileActivity: InactivityPeriodActivity() {
         } else {
             user.img
         }
-        val isRepeated = AppUtils.isNotRepeatUser(updateNan, dao)
-        if((updateName.isNotEmpty() && updateSurname.isNotEmpty() && !updateAdmin) && !isRepeated || (updateName.isNotEmpty() && updateSurname.isNotEmpty() && updateAdmin && updateEmail.isNotEmpty() && updatePassword.isNotEmpty()) && !isRepeated) {
+        if((updateName.isNotEmpty() && updateSurname.isNotEmpty() && !updateAdmin)|| (updateName.isNotEmpty() && updateSurname.isNotEmpty() && updateAdmin && updateEmail.isNotEmpty() && updatePassword.isNotEmpty())) {
             val updateProfile = Profila(
                 profilID = user.profilID,
                 izena = updateName,

@@ -270,7 +270,7 @@ class MainActivity : AppCompatActivity() {
         val etName= bindingAddProduct.etName.text.toString()
         val etQuantity= bindingAddProduct.etQuantity.text.toString().toIntOrNull() ?: -1
         val etLessQuantity= bindingAddProduct.etLessQuatity.text.toString().toIntOrNull() ?: -1
-        val spinnerTypeValue= spinnerType.selectedItem.toString()
+        val spinnerTypeValue= spinnerType
         val cameraImg: String = if (tempBitmap != null) {
             AppUtils.savePhoto(this, tempBitmap!!, etName, "aliment")
         } else {
@@ -278,8 +278,8 @@ class MainActivity : AppCompatActivity() {
         }
         val dB = Datubasea(this@MainActivity)
         val dao = dB.getDAO()
-        val isRepeat= AppUtils.isNotRepeatProduct(etName, dao)
-        if(etName.isEmpty() || etQuantity<0 || etLessQuantity<0 || spinnerTypeValue == "Guztiak" || isRepeat  ){
+        val isnotRepeat= AppUtils.isNotRepeatProduct(etName, dao)
+        if(etName.isEmpty() || etQuantity<0 || etLessQuantity<0 || spinnerTypeValue.selectedItemPosition == 0 || isnotRepeat ){
             Toast.makeText(
                 this,
                 "Datu guztiak sartu behar dira",
@@ -293,7 +293,7 @@ class MainActivity : AppCompatActivity() {
                 val product = Produktua(
                     izena = etName,
                     img = cameraImg,
-                    mota = spinnerTypeValue,
+                    mota = spinnerTypeValue.selectedItem.toString(),
                     gaituta = true,
                     kantitatea = etQuantity,
                     gutxienekoKantitatea = etLessQuantity

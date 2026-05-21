@@ -194,19 +194,17 @@ class EditProductActivity: InactivityPeriodActivity() {
         )
         bindingDialogSeeEditProductBinding.spinnerTypeDialog.adapter = adapterType
 
-        val spinnerPosition = adapterType.getPosition(product.mota)
+        val spinnerPosition = when (product.mota.lowercase()) {
+            "edaria", "bebida" -> 1
+            "janaria", "comida" -> 2
+            else -> 0
+        }
         bindingDialogSeeEditProductBinding.spinnerTypeDialog.setSelection(spinnerPosition)
         bindingDialogSeeEditProductBinding.etName.setText(product.izena)
         bindingDialogSeeEditProductBinding.etQuantity.setText(product.kantitatea.toString())
         bindingDialogSeeEditProductBinding.etLessQuatity.setText(product.gutxienekoKantitatea.toString())
 
-        val context = binding.root.context
-        val imageId = context.resources.getIdentifier(product.img, "drawable", context.packageName)
-        if(imageId!=0) {
-            bindingDialogSeeEditProductBinding.imgProduct.setImageResource(imageId)
-        }else{
-            bindingDialogSeeEditProductBinding.imgProduct.setImageResource(R.drawable.aliment)
-        }
+        AppUtils.uploadImg(bindingDialogSeeEditProductBinding.imgProduct, product.img, "aliment")
         if(product.gaituta) {
             bindingDialogSeeEditProductBinding.cbPaid.isChecked=true
         }
@@ -228,20 +226,25 @@ class EditProductActivity: InactivityPeriodActivity() {
         val updateEnabled = bindingDialogSeeEditProductBinding.cbPaid.isChecked
         val updateQuantity = bindingDialogSeeEditProductBinding.etQuantity.text.toString().toIntOrNull() ?: -1
         val updateLessQuantity = bindingDialogSeeEditProductBinding.etLessQuatity.text.toString().toIntOrNull() ?: -1
-        val updateType= bindingDialogSeeEditProductBinding.spinnerTypeDialog.selectedItem.toString()
+        val updateType= bindingDialogSeeEditProductBinding.spinnerTypeDialog
         val cameraImg: String = if (tempBitmap != null) {
             AppUtils.savePhoto(this, tempBitmap!!, updateName, "aliment")
         } else {
             product.img
         }
-        if(updateName.isEmpty() || updateQuantity<0 || updateLessQuantity<0 || updateType == "Guztiak") {
+        if(updateName.isEmpty() || updateQuantity<0 || updateLessQuantity<0 || updateType.selectedItemPosition == 0) {
             Toast.makeText(this, "Bete eremu guztiak", Toast.LENGTH_SHORT).show()
         }else {
+            val motaEuskera = when (updateType.selectedItemPosition) {
+                1 -> "Edaria"
+                2 -> "Janaria"
+                else -> ""
+            }
             val updateProduct = Produktua(
                 prodId = product.prodId,
                 izena = updateName,
                 img = cameraImg,
-                mota = bindingDialogSeeEditProductBinding.spinnerTypeDialog.selectedItem.toString(),
+                mota = motaEuskera,
                 gaituta = updateEnabled,
                 kantitatea = updateQuantity,
                 gutxienekoKantitatea= updateLessQuantity

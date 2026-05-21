@@ -215,7 +215,7 @@ class AlbaranActivity: InactivityPeriodActivity() {
 
     private fun updateAlbaran(albaran: Albaran, alertDialog: AlertDialog) {
         val updateName = bindingDialogAlbaran.etName.text.toString()
-        val updateQuantity = bindingDialogAlbaran.etQuantity.text.toString()
+        val updateQuantity = bindingDialogAlbaran.etQuantity.text.toString().toIntOrNull()
         val updateCif = bindingDialogAlbaran.etCif.text.toString()
         val updatePaid = bindingDialogAlbaran.cbPaid.isChecked
 
@@ -224,14 +224,14 @@ class AlbaranActivity: InactivityPeriodActivity() {
         } else {
             albaran.img
         }
-        if (updateName.isNotEmpty() && updateQuantity.isNotEmpty()) {
+        if (updateName.isNotEmpty() && updateCif.isNotEmpty() && updateQuantity!= null &&  updateQuantity > 0) {
             val updateAlbaran = Albaran(
                 albaranId = albaran.albaranId,
                 profilId = currentUser?.profilID ?: 0,
                 izena = updateName,
                 cif = updateCif,
                 img = cameraImg,
-                kantitatea = updateQuantity.toInt(),
+                kantitatea = updateQuantity,
                 sortutakoData = albaran.sortutakoData,
                 ordaindutakoData = if (updatePaid) AppUtils.todayDate() else "",
                 ordainduta = updatePaid
